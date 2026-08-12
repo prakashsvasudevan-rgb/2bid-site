@@ -585,7 +585,7 @@
         <textarea id="message" placeholder="e.g. Medical imaging dataset, 50K annotated images, CC BY-NC license, 200K downloads on HuggingFace..."></textarea>
       </div>
 
-      <button class="submit-btn" id="submitBtn" onclick="submitForm()">Get early access →</button>
+      <!-- Honeypot --><div style="display:none;position:absolute;left:-9999px"><input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off" /></div><button class="submit-btn" id="submitBtn" onclick="submitForm()">Get early access →</button>
       <p class="form-note">No credit card. No commitment. Takes 2 minutes.</p>
       <p class="error-msg" id="errorMsg">Something went wrong. Please email us at founders@2bid.ai</p>
     </div>
@@ -604,7 +604,7 @@
     <li><a href="#how">How it works</a></li>
     <li><a href="#for-creators">For data creators</a></li>
     <li><a href="https://2bid.ai/verify">Verify license</a></li>
-    <li><a href="mailto:founders@2bid.ai">founders@2bid.ai</a></li>
+    <li><a href="mailto:founders@2bid.ai" style="display:none">founders@2bid.ai</a></li>
   </ul>
   <p class="footer-copy">© 2026 2bid.ai · Singapore · The Commercial Standard for AI Assets</p>
 </footer>
@@ -623,7 +623,7 @@
   function submitForm() {
     var email = document.getElementById('email').value.trim();
     var message = document.getElementById('message').value.trim();
-    var btn = document.getElementById('submitBtn');
+    var honeypot = document.getElementById('website_url').value; if (honeypot) { return; } var btn = document.getElementById('submitBtn');
     var errMsg = document.getElementById('errorMsg');
 
     if (!email || !email.includes('@')) {
