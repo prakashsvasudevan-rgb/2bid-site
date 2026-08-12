@@ -587,12 +587,12 @@
 
       <!-- Honeypot --><div style="display:none;position:absolute;left:-9999px"><input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off" /></div><button class="submit-btn" id="submitBtn" onclick="submitForm()">Get early access →</button>
       <p class="form-note">No credit card. No commitment. Takes 2 minutes.</p>
-      <p class="error-msg" id="errorMsg">Something went wrong. Please email us at founders@2bid.ai</p>
+      <p class="error-msg" id="errorMsg">Something went wrong. Please try again.</p>
     </div>
 
     <div class="success-msg" id="successMsg">
       ✅ You are in. We will be in touch within 24 hours.<br>
-      <span style="font-weight:400;font-size:14px;color:#166534;margin-top:6px;display:block">Check your email for confirmation — founders@2bid.ai</span>
+      <span style="font-weight:400;font-size:14px;color:#166534;margin-top:6px;display:block">Check your inbox for a confirmation from our team.</span>
     </div>
   </div>
 </section>
@@ -611,6 +611,7 @@
 
 <script>
   var selectedRole = 'Seller';
+  var formLoadTime = Date.now();
 
   function selectRole(el, role) {
     document.querySelectorAll('.role-option').forEach(function(o) {
@@ -623,7 +624,7 @@
   function submitForm() {
     var email = document.getElementById('email').value.trim();
     var message = document.getElementById('message').value.trim();
-    var honeypot = document.getElementById('website_url').value; if (honeypot) { return; } var btn = document.getElementById('submitBtn');
+    var honeypot = document.getElementById('website_url').value; if (honeypot) { return; } var elapsed = Date.now() - formLoadTime; if (elapsed < 2000) { return; } var btn = document.getElementById('submitBtn');
     var errMsg = document.getElementById('errorMsg');
 
     if (!email || !email.includes('@')) {
