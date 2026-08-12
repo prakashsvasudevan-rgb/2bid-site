@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2bid.ai — Commercial Licensing for AI Datasets</title>
+  <meta name="description" content="The first platform where AI data creators earn commercial licensing revenue from datasets and models they have already created.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --indigo: #4f46e5;
+      --indigo-dark: #3730a3;
+      --indigo-light: #eef2ff;
+      --black: #0f172a;
+      --gray-900: #1e293b;
+      --gray-600: #475569;
+      --gray-400: #94a3b8;
+      --gray-100: #f1f5f9;
+      --gray-50: #f8fafc;
+      --white: #ffffff;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--indigo);
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-600);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-cta {
+      background: var(--indigo);
+      color: var(--white);
+      border: none;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--indigo-dark); }
+
+    /* HERO */
+    .hero {
+      padding: 80px 48px 60px;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--gray-600);
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--indigo);
+      color: var(--white);
+      border: none;
+      padding: 13px 28px;
+      border-radius: 9px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--indigo-dark); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--gray-600);
+      border: 1.5px solid var(--border);
+      padding: 13px 28px;
+      border-radius: 9px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--gray-400); color: var(--black); }
+
+    /* THREE CARDS */
+    .cards-section {
+      background: var(--gray-50);
+      padding: 48px;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+    .card-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--indigo);
+      margin-bottom: 10px;
+    }
+    .card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.55;
+    }
+
+    /* HOW IT WORKS */
+    .how-section {
+      padding: 72px 48px;
+      text-align: center;
+    }
+    .section-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 48px;
+      letter-spacing: -0.01em;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .step-num {
+      width: 40px;
+      height: 40px;
+      background: var(--indigo-light);
+      color: var(--indigo);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      margin: 0 auto 16px;
+    }
+    .step h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+    .step p {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.55;
+    }
+
+    /* COMPANIES SECTION */
+    .companies-section {
+      background: var(--gray-50);
+      padding: 64px 48px;
+    }
+    .companies-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .companies-left h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.3;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+    .companies-left p {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.65;
+    }
+    .companies-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .benefit {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .benefit-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .benefit-text h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 3px;
+    }
+    .benefit-text p {
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    /* FORM SECTION */
+    .form-section {
+      padding: 72px 48px;
+      text-align: center;
+    }
+    .form-section h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .form-section .sub {
+      font-size: 16px;
+      color: var(--gray-600);
+      margin-bottom: 36px;
+    }
+    .form-wrap {
+      max-width: 480px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-600);
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: var(--black);
+      background: var(--white);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--indigo);
+    }
+    .form-group textarea {
+      height: 90px;
+      resize: vertical;
+    }
+    .role-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .role-option {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .role-option:hover { border-color: var(--indigo); }
+    .role-option.selected {
+      border-color: var(--indigo);
+      background: var(--indigo-light);
+    }
+    .role-option input { display: none; }
+    .role-option span {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-600);
+    }
+    .role-option.selected span { color: var(--indigo); }
+    .role-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .role-option.selected .role-dot {
+      border-color: var(--indigo);
+      background: var(--indigo);
+    }
+    .submit-btn {
+      width: 100%;
+      background: var(--indigo);
+      color: var(--white);
+      border: none;
+      padding: 13px;
+      border-radius: 9px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 4px;
+    }
+    .submit-btn:hover { background: var(--indigo-dark); }
+    .submit-btn:disabled { background: var(--gray-400); cursor: not-allowed; }
+    .form-note {
+      font-size: 12px;
+      color: var(--gray-400);
+      text-align: center;
+      margin-top: 10px;
+    }
+    .success-msg {
+      display: none;
+      background: var(--green-light);
+      border: 1px solid #86efac;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      color: var(--green);
+      font-weight: 500;
+      font-size: 15px;
+    }
+    .error-msg {
+      display: none;
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--gray-50);
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--indigo);
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--gray-600);
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--black); }
+    .footer-copy {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 48px 20px 40px; }
+      .cards-section, .how-section, .companies-section, .form-section { padding: 48px 20px; }
+      .cards-grid, .steps { grid-template-columns: 1fr; }
+      .companies-inner { grid-template-columns: 1fr; }
+      footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">2bid.ai</a>
+  <ul class="nav-links">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#for-creators">For data creators</a></li>
+    <li><a href="https://2bid.ai/verify">Verify license</a></li>
+  </ul>
+  <a href="#list" class="nav-cta">Get early access</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Your data has been downloaded thousands of times.<br>How much did you earn?</h1>
+  <p>2bid.ai turns your AI datasets and models into commercial licensing revenue. Your data already has buyers. Now it has a market.</p>
+  <div class="hero-buttons">
+    <a href="#list" class="btn-primary">List my dataset first →</a>
+    <a href="#how" class="btn-ghost">Learn how it works</a>
+  </div>
+</section>
+
+<!-- THREE CARDS -->
+<section class="cards-section">
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-label">01 / Opportunity</div>
+      <h3>Early mover advantage</h3>
+      <p>The creators who join first set the market price. Companies licensing AI data are actively looking — right now. Late movers follow.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">02 / Control</div>
+      <h3>Your data. Your price. Your terms.</h3>
+      <p>You decide what commercial use costs. Set once. Earn every time. We handle certificates, payments, and legal documentation.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">03 / Trust</div>
+      <h3>Legally verified every time</h3>
+      <p>Every license is certified, traceable, and legally binding. Buyers get the certainty their legal teams require. You get paid.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <h2 class="section-title">How it works</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>List</h3>
+      <p>Paste your dataset URL. Set your commercial price. Tell us who it is for. Live in minutes with zero upfront cost.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>License</h3>
+      <p>Companies find your work and pay for commercial rights. A legally binding certificate is issued automatically on every sale.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Earn</h3>
+      <p>90% of the revenue goes directly to you as an early creator. Withdraw anytime. Your academic version stays free — forever.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANIES SECTION -->
+<section class="companies-section" id="for-creators">
+  <div class="companies-inner">
+    <div class="companies-left">
+      <h2>Your work does not stop having value just because you shared it freely.</h2>
+      <p>Academic sharing and commercial licensing are not the same thing. 2bid.ai gives you the infrastructure to separate the two — so your work can be open to the world and still earn for you.</p>
+    </div>
+    <div class="companies-right">
+      <div class="benefit">
+        <div class="benefit-icon">🔬</div>
+        <div class="benefit-text">
+          <h4>Free for research. Paid for products.</h4>
+          <p>Your dataset stays freely available for academic use. Commercial users get a proper license. Clean and simple.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">📜</div>
+        <div class="benefit-text">
+          <h4>Every license is certified and traceable</h4>
+          <p>Buyers get a legally valid certificate. You get a permanent record of every commercial use of your work.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">💳</div>
+        <div class="benefit-text">
+          <h4>Revenue goes directly to you</h4>
+          <p>90% to early creators. Withdraw anytime. No minimum. No waiting periods.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM SECTION -->
+<section class="form-section" id="list">
+  <h2>List your dataset. Start earning.</h2>
+  <p class="sub">Tell us about your dataset. We will be in touch within 24 hours.</p>
+
+  <div class="form-wrap">
+    <div id="theForm">
+      <div class="form-group">
+        <label>Your email address *</label>
+        <input type="email" id="email" placeholder="your@email.com" required />
+      </div>
+
+      <div class="form-group">
+        <label>I am a...</label>
+      </div>
+      <div class="role-group">
+        <div class="role-option selected" onclick="selectRole(this, 'Seller')">
+          <input type="radio" name="role" value="Seller" checked />
+          <div class="role-dot"></div>
+          <span>I want to list a dataset</span>
+        </div>
+        <div class="role-option" onclick="selectRole(this, 'Buyer')">
+          <input type="radio" name="role" value="Buyer" />
+          <div class="role-dot"></div>
+          <span>I am looking to license data</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Tell us about your dataset or what you are looking for (optional)</label>
+        <textarea id="message" placeholder="e.g. Medical imaging dataset, 50K annotated images, CC BY-NC license, 200K downloads on HuggingFace..."></textarea>
+      </div>
+
+      <button class="submit-btn" id="submitBtn" onclick="submitForm()">Get early access →</button>
+      <p class="form-note">No credit card. No commitment. Takes 2 minutes.</p>
+      <p class="error-msg" id="errorMsg">Something went wrong. Please email us at founders@2bid.ai</p>
+    </div>
+
+    <div class="success-msg" id="successMsg">
+      ✅ You are in. We will be in touch within 24 hours.<br>
+      <span style="font-weight:400;font-size:14px;color:#166534;margin-top:6px;display:block">Check your email for confirmation — founders@2bid.ai</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">2bid.ai</div>
+  <ul class="footer-links">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#for-creators">For data creators</a></li>
+    <li><a href="https://2bid.ai/verify">Verify license</a></li>
+    <li><a href="mailto:founders@2bid.ai">founders@2bid.ai</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 2bid.ai · Singapore · The Commercial Standard for AI Assets</p>
+</footer>
+
+<script>
+  var selectedRole = 'Seller';
+
+  function selectRole(el, role) {
+    document.querySelectorAll('.role-option').forEach(function(o) {
+      o.classList.remove('selected');
+    });
+    el.classList.add('selected');
+    selectedRole = role;
+  }
+
+  function submitForm() {
+    var email = document.getElementById('email').value.trim();
+    var message = document.getElementById('message').value.trim();
+    var btn = document.getElementById('submitBtn');
+    var errMsg = document.getElementById('errorMsg');
+
+    if (!email || !email.includes('@')) {
+      document.getElementById('email').style.borderColor = '#dc2626';
+      setTimeout(function() {
+        document.getElementById('email').style.borderColor = '';
+      }, 2000);
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+    errMsg.style.display = 'none';
+
+    // REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+    var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyUUGQQsquvW0V8xfQV1VZ5hleQQ7XDRV2zdc2-CF90uQhLdjkfmqSamSd8QXw0MvOBFQ/exec';
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        role: selectedRole,
+        message: message,
+        source: 'website',
+        timestamp: new Date().toISOString()
+      })
+    }).then(function() {
+      document.getElementById('theForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    }).catch(function() {
+      btn.disabled = false;
+      btn.textContent = 'Get early access →';
+      errMsg.style.display = 'block';
+    });
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
