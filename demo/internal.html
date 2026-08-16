@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Internal Test — 2bid.ai</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+nav{padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1e293b}
+.logo{font-size:18px;font-weight:800;color:#6366f1}
+.badge{background:#dc2626;color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;margin-left:10px}
+.logout{font-size:13px;color:#64748b;cursor:pointer}
+main{max-width:1100px;margin:0 auto;padding:32px 24px}
+h1{font-size:22px;font-weight:800;margin-bottom:4px;color:#f1f5f9}
+.sub{font-size:14px;color:#64748b;margin-bottom:28px}
+
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.lic-card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:20px}
+.lic-id{font-size:14px;font-weight:700;font-family:monospace;color:#818cf8;margin-bottom:4px}
+.lic-meta{font-size:12px;color:#64748b;margin-bottom:14px}
+.btn{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;width:100%;margin-bottom:8px}
+.btn-dl{background:#6366f1;color:#fff}
+.btn-dl:hover{background:#4f46e5}
+.btn-outline{background:transparent;border:1px solid #475569;color:#94a3b8}
+.btn-outline:hover{border-color:#6366f1;color:#818cf8}
+.dl-status{font-size:12px;color:#22c55e;margin-top:6px;display:none}
+
+.test-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.test-card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:20px}
+.test-card h3{font-size:14px;font-weight:700;margin-bottom:12px;color:#f1f5f9}
+textarea{width:100%;height:130px;background:#0f172a;border:1px solid #334155;border-radius:8px;padding:12px;font-size:12px;font-family:monospace;color:#e2e8f0;outline:none;resize:vertical;margin-bottom:10px}
+textarea:focus{border-color:#6366f1}
+.run-btn{background:#6366f1;color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;width:100%}
+.run-btn:hover{background:#4f46e5}
+.result{margin-top:12px;padding:14px;border-radius:8px;font-size:12px;display:none}
+.result.pass{background:#064e3b;border:1px solid #22c55e;color:#bbf7d0}
+.result.fail{background:#1e293b;border:1px solid #475569;color:#94a3b8}
+
+.api-status{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:20px;margin-bottom:20px}
+.api-status h3{font-size:14px;font-weight:700;margin-bottom:10px;color:#f1f5f9}
+.status-row{display:flex;align-items:center;gap:10px;font-size:13px}
+.dot{width:10px;height:10px;border-radius:50%;background:#64748b}
+.dot.ok{background:#22c55e}
+.dot.err{background:#dc2626}
+
+.notes{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:20px;margin-bottom:20px}
+.notes h3{font-size:14px;font-weight:700;margin-bottom:10px;color:#f1f5f9}
+.notes textarea{height:100px}
+
+.full-verify{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:20px;margin-bottom:20px}
+.full-verify h3{font-size:14px;font-weight:700;margin-bottom:10px;color:#f1f5f9}
+</style>
+</head>
+<body>
+
+<div style="background:#1e293b;border-bottom:1px solid #334155;padding:0 32px;display:flex;gap:0">
+  <div class="tab-btn active" id="tab-test" onclick="switchTab('test')" style="padding:12px 20px;font-size:13px;font-weight:600;color:#818cf8;cursor:pointer;border-bottom:2px solid #6366f1">🔬 Test Panel</div>
+  <div class="tab-btn" id="tab-creator" onclick="switchTab('creator')" style="padding:12px 20px;font-size:13px;font-weight:500;color:#64748b;cursor:pointer;border-bottom:2px solid transparent">🏭 Creator View</div>
+  <div class="tab-btn" id="tab-buyer" onclick="switchTab('buyer')" style="padding:12px 20px;font-size:13px;font-weight:500;color:#64748b;cursor:pointer;border-bottom:2px solid transparent">🛒 Buyer View</div>
+  <div class="tab-btn" id="tab-verify" onclick="switchTab('verify')" style="padding:12px 20px;font-size:13px;font-weight:500;color:#64748b;cursor:pointer;border-bottom:2px solid transparent">🔍 Verify View</div>
+  <div class="tab-btn" id="tab-activity" onclick="switchTab('activity')" style="padding:12px 20px;font-size:13px;font-weight:500;color:#64748b;cursor:pointer;border-bottom:2px solid transparent">📊 Activity Log</div>
+</div>
+<div id="sec-test">
+<nav>
+  <div><span class="logo">2bid.ai</span><span class="badge">INTERNAL TEST</span></div>
+  <span class="logout" onclick="logout()">Logout</span>
+</nav>
+<main>
+  <h1>Internal Test Panel — P / Q / R</h1>
+  <p class="sub">Test the full flow before sharing with Michael. All activity here uses internal test licences only.</p>
+
+  <!-- API STATUS -->
+  <div class="api-status">
+    <h3>API Status</h3>
+    <div class="status-row">
+      <div class="dot" id="api-dot"></div>
+      <span id="api-status-text">Checking api.2bid.ai...</span>
+    </div>
+    <div style="font-size:12px;color:#64748b;margin-top:8px">API endpoint: <code style="color:#818cf8">https://api.2bid.ai</code></div>
+  </div>
+
+  <!-- DOWNLOAD INTERNAL COPIES -->
+  <div style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:20px;margin-bottom:20px">
+    <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;color:#f1f5f9">Step 1 — Download Internal Test Copies</h3>
+    <div class="grid3">
+      <div class="lic-card">
+        <div class="lic-id">2BID-INTERNAL-P</div>
+        <div class="lic-meta">Internal Test P · Startup</div>
+        <button class="btn btn-dl" onclick="downloadInternal('2BID-INTERNAL-P','P')">⬇ Download Copy P</button>
+        <button class="btn btn-outline" onclick="loadToTest('P','single')">→ Load into Single Test</button>
+        <div class="dl-status" id="dl-P">✅ Downloaded — open file and paste rows below</div>
+      </div>
+      <div class="lic-card">
+        <div class="lic-id">2BID-INTERNAL-Q</div>
+        <div class="lic-meta">Internal Test Q · Startup</div>
+        <button class="btn btn-dl" onclick="downloadInternal('2BID-INTERNAL-Q','Q')">⬇ Download Copy Q</button>
+        <button class="btn btn-outline" onclick="loadToTest('Q','mix2')">→ Load into Mix 2 Test</button>
+        <div class="dl-status" id="dl-Q">✅ Downloaded</div>
+      </div>
+      <div class="lic-card">
+        <div class="lic-id">2BID-INTERNAL-R</div>
+        <div class="lic-meta">Internal Test R · Enterprise</div>
+        <button class="btn btn-dl" onclick="downloadInternal('2BID-INTERNAL-R','R')">⬇ Download Copy R</button>
+        <button class="btn btn-outline" onclick="loadToTest('R','mix3')">→ Load into Mix 3 Test</button>
+        <div class="dl-status" id="dl-R">✅ Downloaded</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEST SCENARIOS -->
+  <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:#f1f5f9">Step 2 — Run Verification Tests</div>
+  <div class="test-grid">
+    <!-- Single -->
+    <div class="test-card">
+      <h3>Test 1 — Single Licence (P only)</h3>
+      <p style="font-size:12px;color:#64748b;margin-bottom:10px">Expected: FINDS 2BID-INTERNAL-P only</p>
+      <textarea id="t-single" placeholder="Paste rows from Copy P here..."></textarea>
+      <button class="run-btn" onclick="runTest('single','2BID-INTERNAL-P')">Run Test →</button>
+      <div class="result" id="r-single"></div>
+    </div>
+    <!-- Mix 2 -->
+    <div class="test-card">
+      <h3>Test 2 — Mixed P + Q</h3>
+      <p style="font-size:12px;color:#64748b;margin-bottom:10px">Expected: FINDS both P and Q</p>
+      <textarea id="t-mix2" placeholder="Paste rows from Copy P and Copy Q mixed here..."></textarea>
+      <button class="run-btn" onclick="runTest('mix2','2BID-INTERNAL-P,2BID-INTERNAL-Q')">Run Test →</button>
+      <div class="result" id="r-mix2"></div>
+    </div>
+    <!-- Mix 3 -->
+    <div class="test-card">
+      <h3>Test 3 — Mixed P + Q + R</h3>
+      <p style="font-size:12px;color:#64748b;margin-bottom:10px">Expected: FINDS all three</p>
+      <textarea id="t-mix3" placeholder="Paste rows from Copies P, Q and R mixed here..."></textarea>
+      <button class="run-btn" onclick="runTest('mix3','2BID-INTERNAL-P,2BID-INTERNAL-Q,2BID-INTERNAL-R')">Run Test →</button>
+      <div class="result" id="r-mix3"></div>
+    </div>
+    <!-- Innocent -->
+    <div class="test-card">
+      <h3>Test 4 — Innocent Check (should find nothing)</h3>
+      <p style="font-size:12px;color:#64748b;margin-bottom:10px">Expected: NO findings (unmarked data)</p>
+      <textarea id="t-innocent" placeholder="Paste plain text or unrelated data here..."></textarea>
+      <button class="run-btn" onclick="runTest('innocent','')">Run Test →</button>
+      <div class="result" id="r-innocent"></div>
+    </div>
+  </div>
+
+  <!-- FULL FREE-FORM VERIFY -->
+  <div class="full-verify">
+    <h3>Free-form verify — paste anything</h3>
+    <textarea id="t-freeform" style="height:150px" placeholder="Paste any data..."></textarea>
+    <button class="run-btn" onclick="runTest('freeform','')">Run Verify →</button>
+    <div class="result" id="r-freeform"></div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="notes">
+    <h3>Test Notes (session only)</h3>
+    <textarea id="notes-area" placeholder="Add your test notes here..."></textarea>
+  </div>
+
+
+<div id="sec-creator" style="display:none;height:calc(100vh - 120px)">
+  <iframe src="creator.html" style="width:100%;height:100%;border:none;background:#fff;border-radius:12px"></iframe>
+</div>
+<div id="sec-buyer" style="display:none;height:calc(100vh - 120px)">
+  <iframe src="buyer.html" style="width:100%;height:100%;border:none;background:#fff;border-radius:12px"></iframe>
+</div>
+<div id="sec-verify" style="display:none;height:calc(100vh - 120px)">
+  <iframe src="verify.html" style="width:100%;height:100%;border:none;background:#fff;border-radius:12px"></iframe>
+</div>
+<div id="sec-activity" style="display:none">
+  <div style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:24px;margin-bottom:20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <h3 style="font-size:15px;font-weight:700;color:#f1f5f9">📊 Demo Activity Log</h3>
+      <div style="display:flex;gap:10px">
+        <button onclick="refreshActivity()" style="background:#334155;color:#94a3b8;border:none;padding:7px 14px;border-radius:7px;font-size:12px;cursor:pointer">↻ Refresh</button>
+        <button onclick="exportActivity()" style="background:#6366f1;color:#fff;border:none;padding:7px 14px;border-radius:7px;font-size:12px;cursor:pointer">⬇ Export CSV</button>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px">
+      <div style="background:#0f172a;border-radius:8px;padding:14px;text-align:center">
+        <div style="font-size:11px;color:#64748b;margin-bottom:4px">TOTAL EVENTS</div>
+        <div style="font-size:24px;font-weight:800;color:#818cf8" id="stat-total">0</div>
+      </div>
+      <div style="background:#0f172a;border-radius:8px;padding:14px;text-align:center">
+        <div style="font-size:11px;color:#64748b;margin-bottom:4px">VERIFY RUNS</div>
+        <div style="font-size:24px;font-weight:800;color:#22c55e" id="stat-verify">0</div>
+      </div>
+      <div style="background:#0f172a;border-radius:8px;padding:14px;text-align:center">
+        <div style="font-size:11px;color:#64748b;margin-bottom:4px">DOWNLOADS</div>
+        <div style="font-size:24px;font-weight:800;color:#f59e0b" id="stat-dl">0</div>
+      </div>
+      <div style="background:#0f172a;border-radius:8px;padding:14px;text-align:center">
+        <div style="font-size:11px;color:#64748b;margin-bottom:4px">PAGE VIEWS</div>
+        <div style="font-size:24px;font-weight:800;color:#38bdf8" id="stat-views">0</div>
+      </div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <tr style="color:#64748b;border-bottom:1px solid #334155">
+        <th style="text-align:left;padding:8px;font-weight:600">Time (UTC+8)</th>
+        <th style="text-align:left;padding:8px;font-weight:600">User</th>
+        <th style="text-align:left;padding:8px;font-weight:600">Event</th>
+        <th style="text-align:left;padding:8px;font-weight:600">Detail</th>
+        <th style="text-align:left;padding:8px;font-weight:600">Result</th>
+      </tr>
+      <tbody id="activity-table-body">
+        <tr><td colspan="5" style="padding:20px;text-align:center;color:#475569">No activity yet. Refresh once Michael starts testing.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div><!-- end sec-test -->
+</main>
+
+<script>
+const API="https://api.2bid.ai";
+if(!sessionStorage.getItem('2bid_user')){window.location.href='login.html';}
+
+async function checkAPI(){
+  try{
+    const r=await fetch(API+'/health');
+    const d=await r.json();
+    document.getElementById('api-dot').classList.add('ok');
+    document.getElementById('api-status-text').textContent='API online · '+d.records+' records loaded · Patent '+d.patent;
+  }catch(e){
+    document.getElementById('api-dot').classList.add('err');
+    document.getElementById('api-status-text').textContent='API offline — check Cloud Run or start Colab backend';
+  }
+}
+checkAPI();
+
+function downloadInternal(licId,key){
+  window.open(API+'/download/'+licId,'_blank');
+  document.getElementById('dl-'+key).style.display='block';
+}
+
+function loadToTest(key,testId){
+  alert('Download Copy '+key+' first, open the JSONL file, copy a few lines, then paste into the '+testId+' test box.');
+}
+
+function logout(){sessionStorage.removeItem('2bid_user');window.location.href='login.html';}
+
+async function runTest(id, expectedLics){
+  const sample=document.getElementById('t-'+id).value.trim();
+  const resultDiv=document.getElementById('r-'+id);
+  resultDiv.style.display='block';
+  resultDiv.className='result';
+  resultDiv.textContent='Checking...';
+  if(!sample){resultDiv.classList.add('fail');resultDiv.textContent='No sample pasted.';return;}
+
+  let d;
+  try{
+    const r=await fetch(API+'/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sample})});
+    d=await r.json();
+  }catch(e){
+    resultDiv.classList.add('fail');resultDiv.textContent='API unreachable: '+e.message;return;
+  }
+
+  const found=(d.findings||[]).map(f=>f.licence_id);
+  const expected=expectedLics?expectedLics.split(',').filter(Boolean):[];
+
+  let pass=true;
+  let msg='';
+
+  if(id==='innocent'){
+    pass=found.length===0;
+    msg=pass?'✅ PASS — No licences found (correct)':'❌ FAIL — Found licences unexpectedly: '+found.join(', ');
+  } else {
+    const missing=expected.filter(e=>!found.includes(e));
+    const extra=found.filter(f=>!expected.includes(f));
+    pass=missing.length===0;
+    msg=(pass?'✅ PASS':'❌ FAIL');
+    msg+='\nFound: '+(found.join(', ')||'none');
+    msg+='\nExpected: '+(expected.join(', ')||'none');
+    if(missing.length)msg+='\nMissing: '+missing.join(', ');
+    if(extra.length)msg+='\nUnexpected: '+extra.join(', ');
+    msg+='\nRecords: '+d.records_submitted+' submitted, '+d.records_recognised+' recognised';
+  }
+
+  resultDiv.classList.add(pass?'pass':'fail');
+  resultDiv.style.whiteSpace='pre-line';
+  resultDiv.textContent=msg;
+}
+
+function switchTab(name){
+  ['test','creator','buyer','verify','activity'].forEach(t=>{
+    const sec=document.getElementById('sec-'+t);
+    const tab=document.getElementById('tab-'+t);
+    if(sec) sec.style.display=t===name?'block':'none';
+    if(tab){
+      if(t===name){
+        tab.style.color='#818cf8';tab.style.borderBottom='2px solid #6366f1';tab.style.fontWeight='600';
+      } else {
+        tab.style.color='#64748b';tab.style.borderBottom='2px solid transparent';tab.style.fontWeight='500';
+      }
+    }
+  });
+  document.getElementById('sec-test').style.display=name==='test'?'block':'none';
+}
+
+async function refreshActivity(){
+  try{
+    const r=await fetch('https://api.2bid.ai/activity',{headers:{'X-Internal-Token':'2bid-internal-2026'}});
+    const d=await r.json();
+    const events=d.events||[];
+    document.getElementById('stat-total').textContent=events.length;
+    document.getElementById('stat-verify').textContent=events.filter(e=>e.event==='verify').length;
+    document.getElementById('stat-dl').textContent=events.filter(e=>e.event==='download').length;
+    document.getElementById('stat-views').textContent=events.filter(e=>e.event==='pageview').length;
+    const tbody=document.getElementById('activity-table-body');
+    if(events.length===0){
+      tbody.innerHTML='<tr><td colspan="5" style="padding:20px;text-align:center;color:#475569">No activity yet.</td></tr>';
+      return;
+    }
+    tbody.innerHTML=events.slice().reverse().map(e=>`
+      <tr style="border-bottom:1px solid #1e293b">
+        <td style="padding:8px;color:#94a3b8">${e.ts||'—'}</td>
+        <td style="padding:8px;color:#e2e8f0;font-weight:500">${e.user||'demo-user'}</td>
+        <td style="padding:8px"><span style="background:#1e293b;border:1px solid #334155;padding:2px 8px;border-radius:4px;color:#818cf8;font-size:11px">${e.event||'—'}</span></td>
+        <td style="padding:8px;color:#94a3b8;max-width:300px;overflow:hidden;text-overflow:ellipsis">${e.detail||'—'}</td>
+        <td style="padding:8px;color:${e.result==='pass'?'#22c55e':e.result==='fail'?'#ef4444':'#94a3b8'}">${e.result||'—'}</td>
+      </tr>`).join('');
+  }catch(e){
+    document.getElementById('activity-table-body').innerHTML=
+      '<tr><td colspan="5" style="padding:12px;text-align:center;color:#ef4444">Activity API unavailable: '+e.message+'</td></tr>';
+  }
+}
+
+function exportActivity(){
+  window.open('https://api.2bid.ai/activity/export','_blank');
+}
+
+</script>
+</body>
+</html>

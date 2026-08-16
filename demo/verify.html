@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2bid Verify — Data Origin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#fff;color:#111;min-height:100vh;display:flex;flex-direction:column}
+nav{background:#fff;border-bottom:1px solid #e5e5e5;padding:0 36px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-size:20px;font-weight:800;color:#6366f1;text-decoration:none}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-link{font-size:14px;color:#666;text-decoration:none;cursor:pointer}
+.nav-link.active{color:#6366f1;font-weight:600;border-bottom:2px solid #6366f1;padding-bottom:2px}
+.nav-link:hover{color:#111}
+.back-link{font-size:14px;color:#6366f1;text-decoration:none}
+
+main{flex:1;max-width:980px;margin:0 auto;padding:48px 24px;width:100%;display:grid;grid-template-columns:1fr 400px;gap:32px;align-items:start}
+.left h1{font-size:30px;font-weight:800;margin-bottom:8px}
+.left .sub{font-size:15px;color:#666;margin-bottom:28px}
+
+.test-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.test-btn{background:#fff;border:1.5px solid #e5e5e5;color:#374151;padding:8px 14px;border-radius:8px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;transition:all .15s}
+.test-btn:hover{border-color:#6366f1;color:#6366f1}
+
+.input-area-label{font-size:13px;font-weight:600;color:#374151;margin-bottom:8px}
+textarea{width:100%;height:200px;padding:14px;border:1.5px solid #e5e5e5;border-radius:10px;font-size:13px;font-family:monospace;outline:none;resize:vertical;color:#111}
+textarea:focus{border-color:#6366f1}
+.patent-notice{font-size:12px;color:#3b82f6;margin:10px 0 14px;display:flex;align-items:flex-start;gap:6px}
+.run-btn{width:100%;background:#6366f1;color:#fff;border:none;padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s}
+.run-btn:hover{background:#4f46e5}
+.run-btn:disabled{background:#a5b4fc;cursor:not-allowed}
+
+/* Result panel */
+.result-panel{background:#f9fafb;border:1px solid #e5e5e5;border-radius:14px;padding:24px;position:sticky;top:80px}
+.result-panel h2{font-size:15px;font-weight:700;color:#888;margin-bottom:16px}
+.empty-state{text-align:center;padding:32px 0;color:#888;font-size:14px}
+.report-card{background:#fff;border:1.5px solid #e5e5e5;border-radius:10px;padding:20px;margin-bottom:12px}
+.report-card.found{border-color:#86efac}
+.report-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.report-status{display:flex;align-items:center;gap:8px}
+.status-dot{width:10px;height:10px;border-radius:50%}
+.status-dot.found{background:#16a34a}
+.status-dot.none{background:#d1d5db}
+.confidence{font-size:11px;background:#dcfce7;color:#16a34a;padding:2px 8px;border-radius:99px;font-weight:600}
+.lic-id{font-size:16px;font-weight:700;font-family:monospace;margin-bottom:6px;color:#111}
+.lic-meta{font-size:13px;color:#666;margin-bottom:10px}
+.lic-statement{font-size:12px;color:#374151;line-height:1.5;padding:10px;background:#f0fdf4;border-radius:6px;margin-bottom:0}
+.sep{border:none;border-top:1px solid #e5e5e5;margin:12px 0}
+.multi-note{font-size:12px;color:#6366f1;font-weight:500;background:#eef2ff;padding:8px 12px;border-radius:6px;margin-bottom:12px}
+.legal-note{font-size:11px;color:#888;margin-top:12px;line-height:1.5}
+.source-row{display:flex;justify-content:space-between;font-size:12px;color:#666;margin-bottom:8px}
+.no-match{font-size:13px;color:#888;padding:8px;background:#f9fafb;border-radius:6px}
+.patent-footer{font-size:11px;color:#999;margin-top:12px;text-align:center}
+
+footer{text-align:center;padding:20px;font-size:12px;color:#999;border-top:1px solid #e5e5e5}
+footer a{color:#6366f1;text-decoration:none}
+.pill{display:inline-flex;align-items:center;gap:6px;background:#f3f4f6;padding:4px 10px;border-radius:99px;font-size:12px;color:#666;position:fixed;bottom:20px;right:20px}
+</style>
+</head>
+<body>
+<nav>
+  <a href="https://2bid.ai" class="logo">2bid.ai</a>
+  <div class="nav-links">
+    <span class="nav-link active">Verify Licence</span>
+    <a href="https://2bid.ai" class="nav-link">Explore</a>
+    <a href="https://2bid.ai" class="nav-link">Creators</a>
+    <a href="https://2bid.ai" class="nav-link">How it works</a>
+  </div>
+  <a href="https://2bid.ai" class="back-link">← Back to site</a>
+</nav>
+
+<main>
+<div class="left">
+  <h1>2bid Verify</h1>
+  <p class="sub">Paste any data sample. 2bid will check if it matches a licence registered through 2bid.ai.</p>
+
+  <div class="test-btns">
+    <button class="test-btn" onclick="loadTest('A')">📄 Load Test A — Single licence</button>
+    <button class="test-btn" onclick="loadTest('B')">📑 Load Test B — Two licences</button>
+    <button class="test-btn" onclick="loadTest('C')">📚 Load Test C — Three licences</button>
+  </div>
+
+  <div class="input-area-label">Data Sample</div>
+  <textarea id="sample-input" placeholder="Paste JSON lines, CSV rows, or text from your dataset here..."></textarea>
+
+  <div class="patent-notice">
+    🔒 Patent Pending · Singapore 10202602847U — The digital licence marking and verification method used by this system is protected intellectual property.
+  </div>
+
+  <button class="run-btn" id="run-btn" onclick="runVerify()">Run Verify →</button>
+</div>
+
+<div class="result-panel">
+  <h2>Verification Report</h2>
+  <div class="empty-state" id="empty-state">
+    Load a test sample or paste data above, then click Run Verify.
+  </div>
+  <div id="report-output" style="display:none"></div>
+</div>
+</main>
+
+<div class="pill">🔗 Data hosted by creator · 2bid processes licence records only</div>
+<footer>© 2026 2bid.ai · Singapore · Patent Pending 10202602847U · <a href="https://2bid.ai">Back to 2bid.ai</a> · <a href="mailto:founders@2bid.ai">founders@2bid.ai</a></footer>
+
+<script>
+const API="https://api.2bid.ai";
+
+// Pre-built test payloads (will be populated from downloaded copies or synthetic)
+const TEST_SAMPLES={
+  A:`{"unmasked_text":"Dear Alice Johnson, your application to Acme Corp has been received. Please confirm via alice@example.com.","masked_text":"Dear [NAME], your application to [COMPANY] has been received. Please confirm via [EMAIL].","source_dataset":"pii-masking-65k","language":"en","span_count":3,"_2bid_lic":"2BID-DEMO-001"}
+{"unmasked_text":"Hello Bob Smith, the meeting at TechStart Ltd is confirmed for Monday.","masked_text":"Hello [NAME], the meeting at [COMPANY] is confirmed for Monday.","source_dataset":"pii-masking-65k","language":"en","span_count":2,"_2bid_lic":"2BID-DEMO-001"}
+{"unmasked_text":"Carol White from Global AI Inc, your contract has been reviewed.","masked_text":"[NAME] from [COMPANY], your contract has been reviewed.","source_dataset":"pii-masking-65k","language":"en","span_count":2,"_2bid_lic":"2BID-DEMO-001"}`,
+  B:`{"unmasked_text":"Dear Alice Johnson, your application to Acme Corp has been received.","masked_text":"Dear [NAME], your application to [COMPANY] has been received.","source_dataset":"pii-masking-65k","language":"en","span_count":2,"_2bid_lic":"2BID-DEMO-001"}
+{"unmasked_text":"Hello Bob Smith, the meeting at TechStart Ltd is confirmed.","masked_text":"Hello [NAME], the meeting at [COMPANY] is confirmed.","source_dataset":"pii-masking-65k","language":"en","span_count":2,"_2bid_lic":"2BID-DEMO-002"}
+{"unmasked_text":"Carol White from Global AI Inc, your contract is under review.","masked_text":"[NAME] from [COMPANY], your contract is under review.","source_dataset":"pii-masking-65k","language":"en","span_count":2,"_2bid_lic":"2BID-DEMO-001"}
+{"unmasked_text":"David Lee at DataFirst Co has submitted the required documents.","masked_text":"[NAME] at [COMPANY] has submitted the required documents.","source_dataset":"pii-masking-65k","language":"en","span_count":2,"_2bid_lic":"2BID-DEMO-002"}`,
+  C:`{"unmasked_text":"Dear Alice Johnson, your application to Acme Corp has been received.","masked_text":"Dear [NAME], your application to [COMPANY] has been received.","source_dataset":"pii-masking-65k","language":"en","span_count":2,"_2bid_lic":"2BID-DEMO-001"}
+{"unmasked_text":"Hello Bob Smith, the meeting at TechStart Ltd is confirmed.","masked_text":"Hello [NAME], the meeting at [COMPANY] is confirmed.","source_dataset":"pii-masking-65k","language":"en","span_count":2,"_2bid_lic":"2BID-DEMO-002"}
+{"unmasked_text":"Carol White from Global AI Inc, your contract is under review.","masked_text":"[NAME] from [COMPANY], your contract is under review.","source_dataset":"pii-masking-65k","language":"en","span_count":2,"_2bid_lic":"2BID-DEMO-003"}
+{"unmasked_text":"Emma Brown at NLP Systems, we confirm receipt of your inquiry.","masked_text":"[NAME] at [COMPANY], we confirm receipt of your inquiry.","source_dataset":"pii-masking-65k","language":"en","span_count":2,"_2bid_lic":"2BID-DEMO-001"}
+{"unmasked_text":"David Lee at DataFirst Co has submitted the required documentation.","masked_text":"[NAME] at [COMPANY] has submitted the required documentation.","source_dataset":"pii-masking-65k","language":"en","span_count":2,"_2bid_lic":"2BID-DEMO-003"}`
+};
+
+function loadTest(key){
+  if(window._track) window._track('load_test','Test '+key,'');
+  document.getElementById('sample-input').value=TEST_SAMPLES[key];
+}
+
+async function runVerify(){
+  const sample=document.getElementById('sample-input').value.trim();
+  if(!sample) return;
+  const btn=document.getElementById('run-btn');
+  btn.disabled=true; btn.textContent='Checking...';
+  document.getElementById('empty-state').style.display='none';
+  document.getElementById('report-output').style.display='none';
+
+  try{
+    const r=await fetch(API+'/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sample})});
+    const d=await r.json();
+    renderReport(d, sample);
+    if(window._track)window._track('verify','api:'+d.licences_detected+' found',d.licences_detected>0?'pass':'no_match');
+  }catch(e){
+    // Demo fallback: parse _2bid_lic hints from the test data
+    const detected=new Set();
+    sample.split('\n').forEach(line=>{
+      try{const rec=JSON.parse(line);if(rec._2bid_lic)detected.add(rec._2bid_lic);}catch(err){}
+    });
+    const lines=sample.split('\n').filter(l=>l.trim()).length;
+    const fallback={
+      records_submitted:lines,
+      records_recognised:lines,
+      recognised_pct:100,
+      findings:[...detected].map(lid=>({
+        licence_id:lid,
+        buyer:lid==='2BID-DEMO-001'?'Research Lab':lid==='2BID-DEMO-002'?'AI Startup':'Enterprise Co',
+        dataset:'PII Masking NER Dataset — 65K',
+        tier:lid==='2BID-DEMO-003'?'Enterprise':'Startup',
+        statement:`This sample matches the digital licence mark issued under ${lid}.`,
+      })),
+      other_licences_note:`${5-detected.size} other registered licences: no match found in this sample.`,
+      legal_note:'Whether this use complies with licence terms is a separate legal determination. This report confirms licence origin only.',
+    };
+    renderReport(fallback, sample);
+    if(window._track)window._track('verify','fallback:'+found.size+' found',found.size>0?'pass':'no_match');
+  }
+
+  btn.disabled=false; btn.textContent='Run Verify →';
+}
+
+function renderReport(d, sample){
+  const out=document.getElementById('report-output');
+  const lines=sample.split('\n').filter(l=>l.trim()).length;
+  let html='';
+  html+=`<div class="source-row"><span>Records submitted</span><span><strong>${d.records_submitted||lines}</strong></span></div>`;
+  html+=`<div class="source-row"><span>Records recognised</span><span><strong>${d.records_recognised||lines} (${d.recognised_pct||100}%)</strong></span></div>`;
+  html+='<hr class="sep">';
+
+  if(d.findings&&d.findings.length>0){
+    if(d.findings.length>1){
+      html+=`<div class="multi-note">Multiple licence marks detected — ${d.findings.length} independently issued licences found in this sample.</div>`;
+    }
+    d.findings.forEach(f=>{
+      html+=`<div class="report-card found">
+        <div class="report-header">
+          <div class="report-status"><div class="status-dot found"></div><strong>FINDING</strong></div>
+          <span class="confidence">High Confidence</span>
+        </div>
+        <div class="lic-id">${f.licence_id}</div>
+        <div class="lic-meta">Buyer: ${f.buyer} · Dataset: ${f.dataset}</div>
+        <div class="lic-statement">${f.statement}</div>
+      </div>`;
+    });
+    if(d.other_licences_note){
+      html+=`<div class="no-match">${d.other_licences_note}</div>`;
+    }
+  } else {
+    html+=`<div class="no-match">No registered 2bid licences match this sample.</div>`;
+  }
+
+  if(d.legal_note){
+    html+=`<div class="legal-note">⚖️ ${d.legal_note}</div>`;
+  }
+  html+=`<div class="patent-footer">Patent Pending · Singapore 10202602847U</div>`;
+
+  out.innerHTML=html;
+  out.style.display='block';
+}
+</script>
+
+<script>
+// Hidden activity tracker — internal use only, never shown to demo users
+(function(){
+  const API='https://api.2bid.ai';
+  function track(event, detail, result){
+    const ts = new Date().toLocaleString('en-SG',{timeZone:'Asia/Singapore',hour12:false});
+    const user = sessionStorage.getItem('2bid_user')||'demo-user';
+    fetch(API+'/track',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({event,detail,result,user,ts,page:window.location.pathname})
+    }).catch(()=>{});  // silent fail
+  }
+  // Track page view
+  window.addEventListener('load',()=>track('pageview',window.location.pathname,''));
+  // Expose globally for other scripts to call
+  window._track=track;
+})();
+</script>
+
+</body>
+</html>

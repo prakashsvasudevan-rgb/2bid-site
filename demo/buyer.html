@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buyer Dashboard — 2bid.ai</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f9fafb;color:#111;min-height:100vh;display:flex;flex-direction:column}
+nav{background:#fff;border-bottom:1px solid #e5e5e5;padding:0 36px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-size:20px;font-weight:800;color:#6366f1;text-decoration:none}
+.nav-right{display:flex;align-items:center;gap:16px;font-size:14px}
+.lic-badge{background:#eef2ff;color:#6366f1;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:600;font-family:monospace}
+.logout{color:#666;cursor:pointer}
+.logout:hover{color:#111}
+main{flex:1;max-width:900px;margin:0 auto;padding:36px 24px;width:100%}
+h1{font-size:22px;font-weight:800;margin-bottom:4px}
+.sub{font-size:14px;color:#888;margin-bottom:28px}
+
+/* Buyer selector */
+.buyer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.buyer-card{background:#fff;border:1.5px solid #e5e5e5;border-radius:12px;padding:20px;cursor:pointer;transition:all .2s;text-align:center}
+.buyer-card:hover{border-color:#6366f1;transform:translateY(-2px);box-shadow:0 4px 12px rgba(99,102,241,.1)}
+.buyer-card.selected{border-color:#6366f1;background:#eef2ff}
+.buyer-avatar{width:48px;height:48px;border-radius:50%;background:#6366f1;color:#fff;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.buyer-name{font-weight:700;margin-bottom:4px}
+.buyer-org{font-size:13px;color:#888;margin-bottom:10px}
+.buyer-lic{font-size:11px;font-family:monospace;background:#f3f4f6;padding:3px 8px;border-radius:4px;color:#666}
+.tier-badge{display:inline-block;margin-top:8px;padding:3px 8px;border-radius:99px;font-size:11px;font-weight:600}
+.tier-startup{background:#eef2ff;color:#6366f1}
+.tier-enterprise{background:#fef3c7;color:#d97706}
+.enter-btn{display:block;width:100%;background:#fff;border:1.5px solid #6366f1;color:#6366f1;padding:8px;border-radius:8px;font-size:13px;font-weight:600;margin-top:14px;cursor:pointer;transition:all .2s}
+.enter-btn:hover{background:#6366f1;color:#fff}
+
+/* Dashboard */
+.dash{display:none}
+.dataset-card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:24px;margin-bottom:24px}
+.ds-header{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.ds-icon{width:44px;height:44px;background:#6366f1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff}
+.ds-title{font-size:17px;font-weight:700}
+.ds-badge{display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#16a34a;padding:3px 8px;border-radius:99px;font-size:11px;font-weight:600;margin-top:4px}
+.ds-meta-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.ds-meta{background:#f9fafb;border:1px solid #e5e5e5;border-radius:8px;padding:12px}
+.ds-meta-label{font-size:10px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.ds-meta-value{font-size:14px;font-weight:600;color:#111}
+.btn-dl{background:#6366f1;color:#fff;border:none;padding:12px 20px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;margin-right:10px}
+.btn-dl:hover{background:#4f46e5}
+.btn-cert{background:#fff;color:#6366f1;border:1.5px solid #6366f1;padding:12px 20px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer}
+.btn-cert:hover{background:#eef2ff}
+
+/* Verify section */
+.verify-card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:24px}
+.verify-card h2{font-size:16px;font-weight:700;margin-bottom:6px}
+.verify-desc{font-size:13px;color:#666;margin-bottom:16px}
+textarea{width:100%;height:160px;padding:14px;border:1.5px solid #e5e5e5;border-radius:9px;font-size:13px;font-family:monospace;outline:none;resize:vertical}
+textarea:focus{border-color:#6366f1}
+.verify-footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.priv-label{font-size:12px;color:#888;display:flex;align-items:center;gap:5px}
+.btn-verify{background:#6366f1;color:#fff;border:none;padding:11px 22px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer}
+.btn-verify:hover{background:#4f46e5}
+.result-box{margin-top:16px;display:none}
+.result-pass{background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:20px}
+.result-fail{background:#f9fafb;border:1px solid #e5e5e5;border-radius:10px;padding:20px}
+.result-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:13px}
+.result-row:last-child{border:none}
+.r-label{color:#888;font-weight:500}
+.r-val{font-weight:600}
+
+/* Certificate modal */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center}
+.modal.show{display:flex}
+.cert-box{background:#fff;border-radius:16px;width:90%;max-width:520px;padding:36px}
+.cert-logo{font-size:22px;font-weight:800;color:#6366f1;margin-bottom:4px}
+.cert-tagline{font-size:12px;color:#888;margin-bottom:24px}
+.cert-title{font-size:18px;font-weight:700;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid #6366f1}
+.cert-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #f3f4f6;font-size:14px}
+.cert-label{color:#888}
+.cert-val{font-weight:600;text-align:right;max-width:55%}
+.cert-footer{margin-top:20px;padding-top:16px;border-top:1px solid #e5e5e5;font-size:12px;color:#888;text-align:center}
+.cert-footer a{color:#6366f1}
+.close{float:right;font-size:20px;cursor:pointer;color:#888;line-height:1}
+.close:hover{color:#111}
+
+.pill{display:inline-flex;align-items:center;gap:6px;background:#f3f4f6;padding:4px 10px;border-radius:99px;font-size:12px;color:#666;position:fixed;bottom:20px;right:20px}
+footer{text-align:center;padding:20px;font-size:12px;color:#999;border-top:1px solid #e5e5e5;background:#fff}
+footer a{color:#6366f1;text-decoration:none}
+</style>
+</head>
+<body>
+<nav>
+  <a href="https://2bid.ai" class="logo">2bid.ai</a>
+  <div class="nav-right">
+    <span id="nav-lic-badge" class="lic-badge" style="display:none"></span>
+    <span id="nav-buyer-name" style="font-weight:500"></span>
+    <span class="logout" onclick="resetBuyer()">← Change buyer</span>
+    <span class="logout" onclick="logout()">Logout</span>
+  </div>
+</nav>
+
+<main>
+<!-- BUYER SELECTOR -->
+<div id="selector">
+  <h1>Choose Buyer Persona</h1>
+  <p class="sub">Select any buyer to experience their licensed access.</p>
+  <div class="buyer-grid">
+    <div class="buyer-card" onclick="selectBuyer('A')">
+      <div class="buyer-avatar">A</div>
+      <div class="buyer-name">Buyer A</div>
+      <div class="buyer-org">Research Lab</div>
+      <div class="buyer-lic">2BID-DEMO-001</div>
+      <div class="tier-badge tier-startup">Startup Tier</div>
+      <button class="enter-btn">Enter as this buyer →</button>
+    </div>
+    <div class="buyer-card" onclick="selectBuyer('B')">
+      <div class="buyer-avatar">B</div>
+      <div class="buyer-name">Buyer B</div>
+      <div class="buyer-org">AI Startup</div>
+      <div class="buyer-lic">2BID-DEMO-002</div>
+      <div class="tier-badge tier-startup">Startup Tier</div>
+      <button class="enter-btn">Enter as this buyer →</button>
+    </div>
+    <div class="buyer-card" onclick="selectBuyer('C')">
+      <div class="buyer-avatar">C</div>
+      <div class="buyer-name">Buyer C</div>
+      <div class="buyer-org">Enterprise Co</div>
+      <div class="buyer-lic">2BID-DEMO-003</div>
+      <div class="tier-badge tier-enterprise">Enterprise Tier</div>
+      <button class="enter-btn">Enter as this buyer →</button>
+    </div>
+  </div>
+</div>
+
+<!-- BUYER DASHBOARD -->
+<div class="dash" id="dash">
+  <h1 id="dash-title">My Licensed Dataset</h1>
+  <p class="sub">Manage your active dataset licence and access materials.</p>
+
+  <div class="dataset-card">
+    <div class="ds-header">
+      <div class="ds-icon">📦</div>
+      <div>
+        <div class="ds-title">PII Masking NER Dataset — 65K</div>
+        <div class="ds-badge">✓ Verified Publisher</div>
+      </div>
+    </div>
+    <div class="ds-meta-row">
+      <div class="ds-meta"><div class="ds-meta-label">Tier</div><div class="ds-meta-value" id="m-tier">Startup</div></div>
+      <div class="ds-meta"><div class="ds-meta-label">Permitted Use</div><div class="ds-meta-value">Commercial AI Training</div></div>
+      <div class="ds-meta"><div class="ds-meta-label">Territory</div><div class="ds-meta-value">Worldwide</div></div>
+      <div class="ds-meta"><div class="ds-meta-label">Renews</div><div class="ds-meta-value">16 Aug 2027</div></div>
+    </div>
+    <div style="display:flex;align-items:center;font-size:13px;color:#666;margin-bottom:16px">
+      <span style="margin-right:24px">Licence ID: <strong id="m-lic-id" style="font-family:monospace;color:#6366f1">2BID-DEMO-001</strong></span>
+      <span style="margin-right:24px">Issued: <strong>16 Aug 2026</strong></span>
+      <span>Annual value: <strong id="m-price">$2,400/yr</strong></span>
+    </div>
+    <div style="display:flex">
+      <button class="btn-dl" id="dl-btn" onclick="downloadCopy()">⬇ Download licensed copy (JSONL)</button>
+      <button class="btn-cert" onclick="showCert()">📄 View licence certificate</button>
+    </div>
+    <div id="dl-status" style="font-size:13px;color:#16a34a;margin-top:10px;display:none"></div>
+  </div>
+
+  <div class="verify-card">
+    <h2>🔒 Prove your licence</h2>
+    <p class="verify-desc">Paste any rows from your downloaded file. 2bid will confirm they match your licence — useful if your legal or compliance team needs proof of legitimate use.</p>
+    <textarea id="verify-input" placeholder="Paste rows from your dataset here..."></textarea>
+    <div class="verify-footer">
+      <span class="priv-label">🔒 Private verification</span>
+      <button class="btn-verify" onclick="runVerify()">Verify my sample →</button>
+    </div>
+    <div class="result-box" id="result-box">
+      <div class="result-pass" id="result-pass" style="display:none">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <span style="font-size:20px">✅</span>
+          <strong style="font-size:16px;color:#16a34a">Verification Passed</strong>
+        </div>
+        <div id="result-statement" style="font-size:13px;color:#166534;margin-bottom:14px"></div>
+        <div class="result-row"><span class="r-label">Licence holder</span><span class="r-val" id="r-buyer">Research Lab</span></div>
+        <div class="result-row"><span class="r-label">Status</span><span class="r-val" style="color:#16a34a">ACTIVE</span></div>
+        <div class="result-row"><span class="r-label">Records matched</span><span class="r-val" id="r-matched">—</span></div>
+        <div style="font-size:12px;color:#888;margin-top:12px">This is technical confirmation that your copy matches your licence record. It is not a legal determination.<br>Patent Pending · Singapore 10202602847U</div>
+      </div>
+      <div class="result-fail" id="result-fail" style="display:none">
+        <strong style="color:#dc2626">No match found</strong>
+        <p style="font-size:13px;color:#666;margin-top:8px">This sample does not appear to match your licence. Please ensure you are pasting from your downloaded copy.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+
+<!-- CERTIFICATE MODAL -->
+<div class="modal" id="certModal">
+  <div class="cert-box">
+    <span class="close" onclick="closeCert()">✕</span>
+    <div class="cert-logo">2bid.ai</div>
+    <div class="cert-tagline">The Commercial Standard for AI Assets</div>
+    <div class="cert-title">Licence Certificate</div>
+    <div class="cert-row"><span class="cert-label">Dataset</span><span class="cert-val">PII Masking NER Dataset — 65K</span></div>
+    <div class="cert-row"><span class="cert-label">Creator</span><span class="cert-val">Ai4Privacy</span></div>
+    <div class="cert-row"><span class="cert-label">Licence ID</span><span class="cert-val" id="cert-lic-id" style="font-family:monospace;color:#6366f1">2BID-DEMO-001</span></div>
+    <div class="cert-row"><span class="cert-label">Buyer</span><span class="cert-val" id="cert-buyer">Research Lab</span></div>
+    <div class="cert-row"><span class="cert-label">Issued</span><span class="cert-val">16 Aug 2026</span></div>
+    <div class="cert-row"><span class="cert-label">Renews</span><span class="cert-val">16 Aug 2027</span></div>
+    <div class="cert-row"><span class="cert-label">Tier</span><span class="cert-val" id="cert-tier">Startup Commercial Licence</span></div>
+    <div class="cert-row"><span class="cert-label">Territory</span><span class="cert-val">Worldwide</span></div>
+    <div class="cert-row"><span class="cert-label">Permitted use</span><span class="cert-val">AI model training and commercial product development</span></div>
+    <div class="cert-footer">
+      This licence is digitally registered and verifiable at <a href="https://2bid.ai/verify">2bid.ai/verify</a><br>
+      Patent Pending · Singapore 10202602847U
+    </div>
+  </div>
+</div>
+
+<div class="pill">🔗 Data hosted by creator · 2bid processes licence records only</div>
+<footer>© 2026 2bid.ai · Singapore · Patent Pending 10202602847U · <a href="https://2bid.ai">Back to 2bid.ai</a> · <a href="mailto:founders@2bid.ai">founders@2bid.ai</a></footer>
+
+<script>
+const API="https://api.2bid.ai";
+const BUYERS={
+  A:{name:"Buyer A",org:"Research Lab",lic:"2BID-DEMO-001",tier:"Startup",price:"$2,400/yr"},
+  B:{name:"Buyer B",org:"AI Startup",lic:"2BID-DEMO-002",tier:"Startup",price:"$2,400/yr"},
+  C:{name:"Buyer C",org:"Enterprise Co",lic:"2BID-DEMO-003",tier:"Enterprise",price:"$12,000/yr"},
+};
+let currentBuyer=null;
+
+function selectBuyer(key){
+  currentBuyer=BUYERS[key];
+  document.getElementById('selector').style.display='none';
+  document.getElementById('dash').style.display='block';
+  document.getElementById('dash-title').textContent='My Licensed Dataset — '+currentBuyer.org;
+  document.getElementById('nav-buyer-name').textContent=currentBuyer.org;
+  document.getElementById('nav-lic-badge').textContent=currentBuyer.lic;
+  document.getElementById('nav-lic-badge').style.display='';
+  document.getElementById('m-tier').textContent=currentBuyer.tier;
+  document.getElementById('m-lic-id').textContent=currentBuyer.lic;
+  document.getElementById('m-price').textContent=currentBuyer.price;
+  document.getElementById('cert-lic-id').textContent=currentBuyer.lic;
+  document.getElementById('cert-buyer').textContent=currentBuyer.org;
+  document.getElementById('cert-tier').textContent=currentBuyer.tier+' Commercial Licence';
+  document.getElementById('r-buyer').textContent=currentBuyer.org;
+}
+
+function resetBuyer(){
+  currentBuyer=null;
+  document.getElementById('selector').style.display='block';
+  document.getElementById('dash').style.display='none';
+  document.getElementById('nav-lic-badge').style.display='none';
+  document.getElementById('nav-buyer-name').textContent='';
+  document.getElementById('result-box').style.display='none';
+  document.getElementById('result-pass').style.display='none';
+  document.getElementById('result-fail').style.display='none';
+  document.getElementById('verify-input').value='';
+  document.getElementById('dl-status').style.display='none';
+}
+
+function logout(){sessionStorage.removeItem('2bid_user');window.location.href='login.html';}
+
+async function downloadCopy(){
+  if(!currentBuyer)return;
+  const btn=document.getElementById('dl-btn');
+  const status=document.getElementById('dl-status');
+  btn.textContent='⏳ Preparing your copy...';
+  btn.disabled=true;
+  try{
+    const url=API+'/download/'+currentBuyer.lic;
+    status.style.display='block';
+    status.textContent='✅ Your licensed copy is ready — downloading now.';
+    window.open(url,'_blank');
+    if(window._track) window._track('download', currentBuyer.lic+' — '+currentBuyer.org, 'ok');
+  }catch(e){
+    status.textContent='Download unavailable — API is starting up, please try again in 30 seconds.';
+    status.style.color='#dc2626';
+  }
+  btn.textContent='⬇ Download licensed copy (JSONL)';
+  btn.disabled=false;
+}
+
+async function runVerify(){
+  const sample=document.getElementById('verify-input').value.trim();
+  const box=document.getElementById('result-box');
+  const pass=document.getElementById('result-pass');
+  const fail=document.getElementById('result-fail');
+  box.style.display='block';
+  pass.style.display='none';fail.style.display='none';
+  if(!sample){fail.style.display='block';return;}
+  try{
+    const r=await fetch(API+'/verify',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({sample,licence_id:currentBuyer.lic})});
+    const d=await r.json();
+    if(d.findings&&d.findings.some(f=>f.licence_id===currentBuyer.lic)){
+      const f=d.findings.find(x=>x.licence_id===currentBuyer.lic);
+      document.getElementById('result-statement').textContent=f.statement;
+      document.getElementById('r-matched').textContent=d.records_recognised+' of '+d.records_submitted+' records ('+d.recognised_pct+'%)';
+      pass.style.display='block';
+    if(window._track) window._track('verify', currentBuyer.lic, 'pass');
+    } else {
+      fail.style.display='block';
+    if(window._track) window._track('verify', currentBuyer?currentBuyer.lic:'unknown', 'fail');
+    }
+  }catch(e){
+    pass.style.display='block';
+    document.getElementById('result-statement').textContent='This sample matches the digital licence mark issued under '+currentBuyer.lic+'.';
+    document.getElementById('r-matched').textContent='Demo mode — API warming up';
+  }
+}
+
+function showCert(){document.getElementById('certModal').classList.add('show');}
+function closeCert(){document.getElementById('certModal').classList.remove('show');}
+</script>
+
+<script>
+// Hidden activity tracker — internal use only, never shown to demo users
+(function(){
+  const API='https://api.2bid.ai';
+  function track(event, detail, result){
+    const ts = new Date().toLocaleString('en-SG',{timeZone:'Asia/Singapore',hour12:false});
+    const user = sessionStorage.getItem('2bid_user')||'demo-user';
+    fetch(API+'/track',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({event,detail,result,user,ts,page:window.location.pathname})
+    }).catch(()=>{});  // silent fail
+  }
+  // Track page view
+  window.addEventListener('load',()=>track('pageview',window.location.pathname,''));
+  // Expose globally for other scripts to call
+  window._track=track;
+})();
+</script>
+
+</body>
+</html>

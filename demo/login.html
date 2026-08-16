@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo Access — 2bid.ai</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#fff;color:#111;min-height:100vh;display:flex;flex-direction:column}
+nav{padding:0 48px;height:60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e5e5e5}
+.logo{font-size:20px;font-weight:800;color:#6366f1;text-decoration:none}
+.back{font-size:14px;color:#666;text-decoration:none}
+.back:hover{color:#111}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 24px}
+.card{width:100%;max-width:420px}
+h1{font-size:28px;font-weight:800;margin-bottom:8px;text-align:center}
+.sub{font-size:15px;color:#666;text-align:center;margin-bottom:36px}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#374151}
+input{width:100%;padding:12px 14px;border:1.5px solid #e5e5e5;border-radius:9px;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;margin-bottom:16px}
+input:focus{border-color:#6366f1}
+.err{border-color:#dc2626!important}
+.btn{width:100%;background:#6366f1;color:#fff;border:none;padding:13px;border-radius:9px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:4px}
+.btn:hover{background:#4f46e5}
+.hint{font-size:13px;color:#888;text-align:center;margin-top:20px}
+.hint a{color:#6366f1;text-decoration:none}
+.error-msg{background:#fef2f2;border:1px solid #fca5a5;color:#dc2626;padding:12px;border-radius:8px;font-size:14px;margin-bottom:16px;display:none}
+footer{text-align:center;padding:24px;font-size:13px;color:#999;border-top:1px solid #e5e5e5}
+</style>
+</head>
+<body>
+<nav>
+  <a href="https://2bid.ai" class="logo">2bid.ai</a>
+  <a href="https://2bid.ai" class="back">← Back to 2bid.ai</a>
+</nav>
+<main>
+  <div class="card">
+    <h1>2bid.ai Demo Access</h1>
+    <p class="sub">Enter your demo credentials to explore the platform.</p>
+    <div class="error-msg" id="errMsg">Invalid credentials. Please check your email and password.</div>
+    <label>Email</label>
+    <input type="email" id="email" placeholder="demo@2bid.ai" autocomplete="off">
+    <label>Password</label>
+    <input type="password" id="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
+    <button class="btn" onclick="login()">Sign in →</button>
+    <p class="hint">Demo credentials are shared privately.<br>Contact <a href="mailto:founders@2bid.ai">founders@2bid.ai</a> to request access.</p>
+  </div>
+</main>
+<footer>© 2026 2bid.ai · Singapore · Patent Pending 10202602847U</footer>
+<script>
+const CREDS = {
+  "creator@2bid.ai":  {pw:"demo-creator",  dest:"creator.html"},
+  "buyer@2bid.ai":    {pw:"demo-buyer",    dest:"buyer.html"},
+  "verify@2bid.ai":   {pw:"demo-verify",   dest:"verify.html"},
+  "internal@2bid.ai": {pw:"demo-internal", dest:"internal.html"},
+};
+function login(){
+  const e=document.getElementById('email').value.trim().toLowerCase();
+  const p=document.getElementById('password').value;
+  const c=CREDS[e];
+  if(c && c.pw===p){
+    sessionStorage.setItem('2bid_user', e);
+    window.location.href=c.dest;
+  } else {
+    document.getElementById('errMsg').style.display='block';
+    document.getElementById('email').classList.add('err');
+    document.getElementById('password').classList.add('err');
+    setTimeout(()=>{
+      document.getElementById('email').classList.remove('err');
+      document.getElementById('password').classList.remove('err');
+    },2000);
+  }
+}
+</script>
+</body>
+</html>
