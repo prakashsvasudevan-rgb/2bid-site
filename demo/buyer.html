@@ -59,6 +59,10 @@ textarea:focus{border-color:#6366f1}
 .priv-label{font-size:12px;color:#888;display:flex;align-items:center;gap:5px}
 .btn-verify{background:#6366f1;color:#fff;border:none;padding:11px 22px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer}
 .btn-verify:hover{background:#4f46e5}
+.progress-wrap{margin-top:12px;display:none}
+.progress-bar{width:100%;height:8px;background:#e5e5e5;border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#6366f1,#818cf8);border-radius:99px;width:0%;transition:width .3s}
+.progress-text{font-size:12px;color:#888;margin-top:6px;text-align:center}
 .result-box{margin-top:16px;display:none}
 .result-pass{background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:20px}
 .result-fail{background:#f9fafb;border:1px solid #e5e5e5;border-radius:10px;padding:20px}
@@ -86,6 +90,7 @@ textarea:focus{border-color:#6366f1}
 footer{text-align:center;padding:20px;font-size:12px;color:#999;border-top:1px solid #e5e5e5;background:#fff}
 footer a{color:#6366f1;text-decoration:none}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 <nav>
@@ -93,14 +98,55 @@ footer a{color:#6366f1;text-decoration:none}
   <div class="nav-right">
     <span id="nav-lic-badge" class="lic-badge" style="display:none"></span>
     <span id="nav-buyer-name" style="font-weight:500"></span>
-    <span class="logout" onclick="resetBuyer()">← Change buyer</span>
+    <button onclick="resetBuyer()" style="background:#fff;border:1.5px solid #e5e5e5;color:#666;padding:6px 14px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer">↺ Change buyer</button>
     <span class="logout" onclick="logout()">Logout</span>
   </div>
 </nav>
 
 <main>
 <!-- BUYER SELECTOR -->
-<div id="selector">
+
+<!-- DATASET LISTING — what a real buyer sees first -->
+<div id="listing" style="margin-bottom:32px">
+  <h1>Browse Licensed Datasets</h1>
+  <p class="sub" style="margin-bottom:20px">Select a dataset to licence for commercial use.</p>
+  <div style="background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:24px;margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+      <div>
+        <div style="font-size:17px;font-weight:700;margin-bottom:4px">PII Masking NER Dataset — 65K</div>
+        <div style="font-size:13px;color:#888">Ai4Privacy · 21,600 records · EN/FR/DE/ES · JSONL</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;background:#dcfce7;color:#16a34a;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:600">● LIVE</div>
+    </div>
+    <p style="font-size:13px;color:#555;margin-bottom:16px">General-purpose named entity recognition dataset covering 50+ PII entity types.</p>
+    <div style="display:flex;gap:10px">
+      <a href="payment.html?dataset=pii-masking-65k&tier=Startup" style="background:#6366f1;color:#fff;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">Startup — $2,400/yr →</a>
+      <a href="payment.html?dataset=pii-masking-65k&tier=Enterprise" style="background:#fff;color:#6366f1;border:1.5px solid #6366f1;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">Enterprise — $12,000/yr →</a>
+      <a href="payment.html?dataset=pii-masking-65k&tier=Research" style="background:#fff;color:#888;border:1.5px solid #e5e5e5;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">Research — Free</a>
+    </div>
+  </div>
+  <div style="background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:24px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+      <div>
+        <div style="font-size:17px;font-weight:700;margin-bottom:4px">PII Masking NER Dataset — 300K</div>
+        <div style="font-size:13px;color:#888">Ai4Privacy · 225,000 records · EN/FR/DE/ES · JSONL</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;background:#dcfce7;color:#16a34a;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:600">● LIVE</div>
+    </div>
+    <p style="font-size:13px;color:#555;margin-bottom:16px">Enterprise-scale NER dataset. 10× the training volume of the 65K edition.</p>
+    <div style="display:flex;gap:10px">
+      <a href="payment.html?dataset=pii-masking-300k&tier=Startup" style="background:#6366f1;color:#fff;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">Startup — $8,400/yr →</a>
+      <a href="payment.html?dataset=pii-masking-300k&tier=Enterprise" style="background:#fff;color:#6366f1;border:1.5px solid #6366f1;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">Enterprise — $36,000/yr →</a>
+      <a href="payment.html?dataset=pii-masking-300k&tier=Research" style="background:#fff;color:#888;border:1.5px solid #e5e5e5;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">Research — Free</a>
+    </div>
+  </div>
+  <div style="margin-top:16px;text-align:center">
+    <span style="font-size:13px;color:#888">Already have a licence? </span>
+    <a onclick="document.getElementById('listing').style.display='none';document.getElementById('selector').style.display='block'" style="font-size:13px;color:#6366f1;cursor:pointer;font-weight:600">Enter your buyer dashboard →</a>
+  </div>
+</div>
+
+<div id="selector" style="display:none">
   <h1>Choose Buyer Persona</h1>
   <p class="sub">Select any buyer to experience their licensed access.</p>
   <div class="buyer-grid">
@@ -111,6 +157,7 @@ footer a{color:#6366f1;text-decoration:none}
       <div class="buyer-lic">2BID-DEMO-001</div>
       <div class="tier-badge tier-startup">Startup Tier</div>
       <button class="enter-btn">Enter as this buyer →</button>
+      <a href="payment.html?dataset=pii-masking-65k&tier=Startup" style="display:block;text-align:center;font-size:12px;color:#888;margin-top:8px;text-decoration:none">or purchase a new licence →</a>
     </div>
     <div class="buyer-card" onclick="selectBuyer('B')">
       <div class="buyer-avatar">B</div>
@@ -119,6 +166,7 @@ footer a{color:#6366f1;text-decoration:none}
       <div class="buyer-lic">2BID-DEMO-002</div>
       <div class="tier-badge tier-startup">Startup Tier</div>
       <button class="enter-btn">Enter as this buyer →</button>
+      <a href="payment.html?dataset=pii-masking-65k&tier=Startup" style="display:block;text-align:center;font-size:12px;color:#888;margin-top:8px;text-decoration:none">or purchase a new licence →</a>
     </div>
     <div class="buyer-card" onclick="selectBuyer('C')">
       <div class="buyer-avatar">C</div>
@@ -156,10 +204,14 @@ footer a{color:#6366f1;text-decoration:none}
       <span>Annual value: <strong id="m-price">$2,400/yr</strong></span>
     </div>
     <div style="display:flex">
-      <button class="btn-dl" id="dl-btn" onclick="downloadCopy()">⬇ Download licensed copy (JSONL)</button>
+      <button class="btn-dl" id="dl-btn" onclick="downloadCopy()">⬇ Download licensed copy</button>
       <button class="btn-cert" onclick="showCert()">📄 View licence certificate</button>
     </div>
     <div id="dl-status" style="font-size:13px;color:#16a34a;margin-top:10px;display:none"></div>
+    <div class="progress-wrap" id="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-text" id="progress-text">Fetching from HuggingFace and applying digital licence mark...</div>
+    </div>
   </div>
 
   <div class="verify-card">
@@ -188,6 +240,9 @@ footer a{color:#6366f1;text-decoration:none}
       </div>
     </div>
   </div>
+  <div style="text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid #e5e5e5">
+    <button onclick="resetBuyer()" style="background:#f9fafb;border:1.5px solid #e5e5e5;color:#6366f1;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">↺ Reset &amp; try as different buyer</button>
+  </div>
 </div>
 </main>
 
@@ -207,10 +262,14 @@ footer a{color:#6366f1;text-decoration:none}
     <div class="cert-row"><span class="cert-label">Tier</span><span class="cert-val" id="cert-tier">Startup Commercial Licence</span></div>
     <div class="cert-row"><span class="cert-label">Territory</span><span class="cert-val">Worldwide</span></div>
     <div class="cert-row"><span class="cert-label">Permitted use</span><span class="cert-val">AI model training and commercial product development</span></div>
-    <div class="cert-footer">
-      This licence is digitally registered and verifiable at <a href="https://2bid.ai/verify">2bid.ai/verify</a><br>
-      Patent Pending · Singapore 10202602847U
-    </div>
+    <div style="margin-top:16px;display:flex;gap:10px;justify-content:center">
+        <button onclick="downloadCertPDF()" style="background:#6366f1;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">📄 Download PDF</button>
+        <button onclick="closeCert()" style="background:#fff;color:#666;border:1.5px solid #e5e5e5;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">Close</button>
+      </div>
+      <div class="cert-footer">
+        This licence is digitally registered and verifiable at <a href="https://2bid.ai/verify">2bid.ai/verify</a><br>
+        Patent Pending · Singapore 10202602847U
+      </div>
   </div>
 </div>
 
@@ -218,7 +277,7 @@ footer a{color:#6366f1;text-decoration:none}
 <footer>© 2026 2bid.ai · Singapore · Patent Pending 10202602847U · <a href="https://2bid.ai">Back to 2bid.ai</a> · <a href="mailto:founders@2bid.ai">founders@2bid.ai</a></footer>
 
 <script>
-const API="https://api.2bid.ai";
+const API="https://twobidapi-1087613332297.asia-southeast1.run.app";
 const BUYERS={
   A:{name:"Buyer A",org:"Research Lab",lic:"2BID-DEMO-001",tier:"Startup",price:"$2,400/yr"},
   B:{name:"Buyer B",org:"AI Startup",lic:"2BID-DEMO-002",tier:"Startup",price:"$2,400/yr"},
@@ -274,7 +333,7 @@ async function downloadCopy(){
     status.textContent='Download unavailable — API is starting up, please try again in 30 seconds.';
     status.style.color='#dc2626';
   }
-  btn.textContent='⬇ Download licensed copy (JSONL)';
+  btn.textContent='⬇ Download licensed copy';
   btn.disabled=false;
 }
 
@@ -307,6 +366,63 @@ async function runVerify(){
   }
 }
 
+
+function downloadCertPDF(){
+  if(!currentBuyer) return;
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({orientation:'portrait', unit:'mm', format:'a4'});
+  const W=210; const M=20;
+  const lid=currentBuyer.lic;
+  const buyer=currentBuyer.org;
+  const tier=currentBuyer.tier;
+
+  doc.setFillColor(249,250,251); doc.rect(0,0,W,297,'F');
+  doc.setFillColor(99,102,241); doc.rect(0,0,W,38,'F');
+  doc.setTextColor(255,255,255);
+  doc.setFontSize(26); doc.setFont('helvetica','bold'); doc.text('2bid.ai', M, 22);
+  doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.text('The Commercial Standard for AI Assets', M, 30);
+  doc.setFontSize(8); doc.text('Patent Pending · Singapore 10202602847U', W-M, 22, {align:'right'});
+
+  doc.setTextColor(17,24,39);
+  doc.setFontSize(20); doc.setFont('helvetica','bold'); doc.text('Licence Certificate', M, 58);
+  doc.setDrawColor(99,102,241); doc.setLineWidth(0.8); doc.line(M,63,W-M,63);
+
+  doc.setFillColor(238,242,255); doc.roundedRect(M,68,W-(M*2),18,3,3,'F');
+  doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(107,114,128); doc.text('LICENCE ID', M+6, 75);
+  doc.setFontSize(14); doc.setFont('helvetica','bold'); doc.setTextColor(99,102,241); doc.text(lid, M+6, 82);
+
+  const fields=[
+    ['Dataset','PII Masking NER Dataset — 65K'],['Creator','Ai4Privacy'],
+    ['Buyer',buyer],['Licence Tier',tier+' Commercial Licence'],
+    ['Issued','16 Aug 2026'],['Renews','16 Aug 2027'],
+    ['Permitted Use','AI model training and commercial product development'],['Territory','Worldwide']
+  ];
+  let y=100;
+  fields.forEach(([label,value],i)=>{
+    i%2===0?doc.setFillColor(255,255,255):doc.setFillColor(249,250,251);
+    doc.rect(M,y-5,W-(M*2),12,'F');
+    doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(107,114,128); doc.text(label,M+4,y+1);
+    doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.setTextColor(17,24,39);
+    doc.text(doc.splitTextToSize(value,W-M*2-60),W-M-4,y+1,{align:'right'});
+    y+=12;
+  });
+
+  y+=8;
+  doc.setFillColor(240,253,244); doc.roundedRect(M,y,W-(M*2),22,3,3,'F');
+  doc.setDrawColor(134,239,172); doc.setLineWidth(0.5); doc.roundedRect(M,y,W-(M*2),22,3,3,'S');
+  doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(22,163,74); doc.text('✓  Digitally Registered & Verifiable',M+6,y+8);
+  doc.setFont('helvetica','normal'); doc.setTextColor(75,85,99); doc.setFontSize(8);
+  doc.text('Verifiable at any time at https://2bid.ai/verify',M+6,y+16);
+
+  y=265; doc.setDrawColor(229,231,235); doc.setLineWidth(0.5); doc.line(M,y,W-M,y);
+  doc.setFontSize(8); doc.setFont('helvetica','normal'); doc.setTextColor(156,163,175);
+  doc.text('© 2026 2bid.ai · Singapore · Patent Pending 10202602847U',W/2,y+7,{align:'center'});
+  doc.text('Licence ID: '+lid,W/2,y+14,{align:'center'});
+
+  doc.save('2bid_licence_'+lid+'.pdf');
+  if(window._track) window._track('pdf_download',lid,'ok');
+}
+
 function showCert(){document.getElementById('certModal').classList.add('show');}
 function closeCert(){document.getElementById('certModal').classList.remove('show');}
 </script>
@@ -314,7 +430,7 @@ function closeCert(){document.getElementById('certModal').classList.remove('show
 <script>
 // Hidden activity tracker — internal use only, never shown to demo users
 (function(){
-  const API='https://api.2bid.ai';
+  const API='https://twobidapi-1087613332297.asia-southeast1.run.app';
   function track(event, detail, result){
     const ts = new Date().toLocaleString('en-SG',{timeZone:'Asia/Singapore',hour12:false});
     const user = sessionStorage.getItem('2bid_user')||'demo-user';

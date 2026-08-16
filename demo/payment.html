@@ -176,6 +176,7 @@ footer a{color:#6366f1;text-decoration:none}
         <button class="btn-dl" id="dl-btn" onclick="downloadNow()">⬇ Download licensed copy</button>
         <button class="btn-dl" style="background:#16a34a" onclick="downloadPDF()">📄 Download PDF certificate</button>
         <button class="btn-back" onclick="goToBuyer()">Go to my dashboard →</button>
+        <button onclick="resetPayment()" style="width:100%;background:#f9fafb;border:1.5px solid #e5e5e5;color:#666;padding:10px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;margin-top:10px">↺ Reset &amp; try again</button>
       </div>
       <div class="email-note" id="email-note">📧 Licence certificate sent to your email.</div>
     </div>
@@ -185,7 +186,7 @@ footer a{color:#6366f1;text-decoration:none}
 <footer>© 2026 2bid.ai · Singapore · Patent Pending 10202602847U · <a href="https://2bid.ai">Back to 2bid.ai</a> · <a href="mailto:founders@2bid.ai">founders@2bid.ai</a></footer>
 
 <script>
-const API = "https://api.2bid.ai";
+const API = "https://twobidapi-1087613332297.asia-southeast1.run.app";
 
 // Read params from URL
 const params = new URLSearchParams(window.location.search);
@@ -416,6 +417,17 @@ function downloadPDF(){
   if(window._track) window._track('pdf_download', lid, 'ok');
 }
 
+function resetPayment(){
+  document.getElementById('payment-panel').style.display='block';
+  document.getElementById('payment-panel').style.opacity='1';
+  document.getElementById('payment-panel').style.pointerEvents='auto';
+  document.getElementById('success-panel').style.display='none';
+  document.getElementById('f-name').value='';
+  document.getElementById('f-email').value='';
+  document.getElementById('f-card').value='';
+  document.getElementById('f-exp').value='';
+  document.getElementById('f-cvc').value='';
+}
 function goToBuyer(){
   window.location.href = 'buyer.html';
 }
@@ -424,7 +436,7 @@ function goToBuyer(){
 <!-- Hidden tracker -->
 <script>
 (function(){
-  const API='https://api.2bid.ai';
+  const API='https://twobidapi-1087613332297.asia-southeast1.run.app';
   function track(event, detail, result){
     const ts = new Date().toLocaleString('en-SG',{timeZone:'Asia/Singapore',hour12:false});
     fetch(API+'/track',{method:'POST',headers:{'Content-Type':'application/json'},

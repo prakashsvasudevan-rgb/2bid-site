@@ -76,9 +76,9 @@ textarea:focus{border-color:#6366f1}
     <h3>API Status</h3>
     <div class="status-row">
       <div class="dot" id="api-dot"></div>
-      <span id="api-status-text">Checking api.2bid.ai...</span>
+      <span id="api-status-text">Checking API...</span>
     </div>
-    <div style="font-size:12px;color:#64748b;margin-top:8px">API endpoint: <code style="color:#818cf8">https://api.2bid.ai</code></div>
+    <div style="font-size:12px;color:#64748b;margin-top:8px">API endpoint: <code style="color:#818cf8">https://twobidapi-1087613332297.asia-southeast1.run.app</code></div>
   </div>
 
   <!-- DOWNLOAD INTERNAL COPIES -->
@@ -155,20 +155,23 @@ textarea:focus{border-color:#6366f1}
   </div>
 
   <!-- NOTES -->
-  <div class="notes">
+  <div style="text-align:center;margin-bottom:20px">
+  <button onclick="resetTests()" style="background:#334155;color:#94a3b8;border:none;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">↺ Reset all tests &amp; try again</button>
+</div>
+<div class="notes">
     <h3>Test Notes (session only)</h3>
     <textarea id="notes-area" placeholder="Add your test notes here..."></textarea>
   </div>
 
 
 <div id="sec-creator" style="display:none;height:calc(100vh - 120px)">
-  <iframe src="creator.html" style="width:100%;height:100%;border:none;background:#fff;border-radius:12px"></iframe>
+  <iframe src="/demo/creator.html" style="width:100%;height:100%;border:none;background:#fff;border-radius:12px"></iframe>
 </div>
 <div id="sec-buyer" style="display:none;height:calc(100vh - 120px)">
-  <iframe src="buyer.html" style="width:100%;height:100%;border:none;background:#fff;border-radius:12px"></iframe>
+  <iframe src="/demo/buyer.html" style="width:100%;height:100%;border:none;background:#fff;border-radius:12px"></iframe>
 </div>
 <div id="sec-verify" style="display:none;height:calc(100vh - 120px)">
-  <iframe src="verify.html" style="width:100%;height:100%;border:none;background:#fff;border-radius:12px"></iframe>
+  <iframe src="/demo/verify.html" style="width:100%;height:100%;border:none;background:#fff;border-radius:12px"></iframe>
 </div>
 <div id="sec-activity" style="display:none">
   <div style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:24px;margin-bottom:20px">
@@ -216,7 +219,7 @@ textarea:focus{border-color:#6366f1}
 </main>
 
 <script>
-const API="https://api.2bid.ai";
+const API="https://twobidapi-1087613332297.asia-southeast1.run.app";
 if(!sessionStorage.getItem('2bid_user')){window.location.href='login.html';}
 
 async function checkAPI(){
@@ -285,6 +288,15 @@ async function runTest(id, expectedLics){
   resultDiv.textContent=msg;
 }
 
+function resetTests(){
+  ['single','mix2','mix3','innocent','freeform'].forEach(id=>{
+    const t=document.getElementById('t-'+id);
+    const r=document.getElementById('r-'+id);
+    if(t)t.value='';
+    if(r){r.style.display='none';r.className='result';r.textContent='';}
+  });
+  document.getElementById('notes-area').value='';
+}
 function switchTab(name){
   ['test','creator','buyer','verify','activity'].forEach(t=>{
     const sec=document.getElementById('sec-'+t);
@@ -303,7 +315,7 @@ function switchTab(name){
 
 async function refreshActivity(){
   try{
-    const r=await fetch('https://api.2bid.ai/activity',{headers:{'X-Internal-Token':'2bid-internal-2026'}});
+    const r=await fetch('https://twobidapi-1087613332297.asia-southeast1.run.app/activity',{headers:{'X-Internal-Token':'2bid-internal-2026'}});
     const d=await r.json();
     const events=d.events||[];
     document.getElementById('stat-total').textContent=events.length;
@@ -330,7 +342,7 @@ async function refreshActivity(){
 }
 
 function exportActivity(){
-  window.open('https://api.2bid.ai/activity/export','_blank');
+  window.open('https://twobidapi-1087613332297.asia-southeast1.run.app/activity/export','_blank');
 }
 
 </script>
