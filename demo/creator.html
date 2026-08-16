@@ -132,6 +132,7 @@ footer a{color:#6366f1;text-decoration:none}
   <a class="nav-item" id="nav-earnings" onclick="showSection('earnings')"><span class="icon">💰</span> Earnings</a>
   <a class="nav-item" id="nav-withdrawals" onclick="showSection('withdrawals')"><span class="icon">🏦</span> Withdrawals</a>
   <a class="nav-item" id="nav-settings" onclick="showSection('settings')"><span class="icon">⚙️</span> Settings</a>
+  <a class="nav-item" id="nav-verify-from-creator" onclick="showSection('verify-from-creator')" style="margin-top:8px;border-top:1px solid #e5e5e5;padding-top:16px"><span class="icon">🔍</span> Verify Data</a>
   <div class="sidebar-bottom">
     <div class="logout-btn" onclick="logout()">↪ Logout</div>
   </div>
@@ -153,7 +154,7 @@ footer a{color:#6366f1;text-decoration:none}
     <div class="kpi"><div class="kpi-label">HuggingFace Downloads</div><div class="kpi-value">847,293</div><div class="kpi-sub green">↑ 94,821 this month</div></div>
     <div class="kpi"><div class="kpi-label">Commercial Enquiries</div><div class="kpi-value">14</div><div class="kpi-sub">3 new this week</div></div>
     <div class="kpi"><div class="kpi-label">Dataset Reach</div><div class="kpi-value">4 langs</div><div class="kpi-sub gray">EN/FR/DE/ES · 50+ entity types</div></div>
-    <div class="kpi" style="cursor:pointer" onclick="window.open('/demo/verify.html','_blank')"><div class="kpi-label">Verify a Sample</div><div class="kpi-value" style="font-size:20px">🔍</div><div class="kpi-sub" style="color:#6366f1">Check if data was licensed via 2bid →</div></div>
+    <div class="kpi" style="cursor:pointer" onclick="showSection('verify-from-creator')"><div class="kpi-label">Verify a Sample</div><div class="kpi-value" style="font-size:20px">🔍</div><div class="kpi-sub" style="color:#6366f1">Check if data was licensed via 2bid →</div></div>
   </div>
   <div class="two-col">
     <div class="panel">
@@ -181,7 +182,7 @@ footer a{color:#6366f1;text-decoration:none}
     <div class="activity-item"><div class="dot"></div><div><div class="activity-text">Payment received · $2,000 transferred to OCBC ••••4521</div><div class="activity-date">16 Jul 2026</div></div></div>
     <div class="activity-item"><div class="dot"></div><div><div class="activity-text">Licence issued · 2BID-DEMO-001 · Research Lab · PII 65K · $2,400/yr</div><div class="activity-date">01 Jul 2026</div></div></div>
   </div>
-  <div class="info-box">ℹ️ Seen your data used somewhere? Paste a sample into 2bid Verify to check if it was licensed through 2bid.ai. <a onclick="window.open('/demo/verify.html','_blank')" style="color:#0369a1;font-weight:600;cursor:pointer;margin-left:8px">Run Verify →</a></div>
+  <div class="info-box">ℹ️ Seen your data used somewhere? Paste a sample into 2bid Verify to check if it was licensed through 2bid.ai. <a onclick="showSection('verify-from-creator')" style="color:#0369a1;font-weight:600;cursor:pointer;margin-left:8px">Run Verify →</a></div>
 </div>
 
 <!-- DATASETS -->
@@ -309,13 +310,29 @@ footer a{color:#6366f1;text-decoration:none}
 
 <!-- VERIFY FROM CREATOR -->
 <div id="sec-verify-from-creator" style="display:none">
-  <h1>Verify a Sample</h1>
-  <p class="page-sub">Paste a data sample to check if it was licensed through 2bid.ai.</p>
-  <div style="background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:24px">
-    <textarea id="creator-verify-input" style="width:100%;height:180px;padding:14px;border:1.5px solid #e5e5e5;border-radius:9px;font-size:13px;font-family:monospace;outline:none;resize:vertical;margin-bottom:12px" placeholder="Paste JSON lines or text from your dataset here..."></textarea>
-    <div style="font-size:12px;color:#3b82f6;margin-bottom:14px">🔒 Patent Pending · Singapore 10202602847U — The digital licence marking and verification method is protected intellectual property.</div>
-    <button class="btn-primary" style="width:100%;padding:13px;font-size:15px" onclick="runCreatorVerify()">Run Verify →</button>
-    <div id="creator-verify-result" style="margin-top:16px;display:none"></div>
+  <h1>Verify a Data Sample</h1>
+  <p class="page-sub">Check if any data sample was licensed through 2bid.ai — paste rows from any source.</p>
+  <div style="display:grid;grid-template-columns:1fr 380px;gap:20px">
+    <div style="background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:24px">
+      <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:8px">Paste data sample</div>
+      <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:12px;margin-bottom:14px;font-size:13px;color:#0369a1;line-height:1.5">
+        Paste any rows from a dataset — even if you think they might have come from your dataset. 2bid will check if they match any registered licence.
+      </div>
+      <textarea id="creator-verify-input" style="width:100%;height:220px;padding:14px;border:1.5px solid #e5e5e5;border-radius:9px;font-size:13px;font-family:monospace;outline:none;resize:vertical;margin-bottom:12px" placeholder="Paste JSON lines or plain text here...&#10;&#10;One record per line."></textarea>
+      <div style="font-size:12px;color:#3b82f6;margin-bottom:14px">🔒 Patent Pending · Singapore 10202602847U — The digital licence marking and verification method is protected intellectual property.</div>
+      <div style="display:flex;gap:10px">
+        <button class="btn-primary" style="flex:1;padding:13px;font-size:15px" onclick="runCreatorVerify()">Run Verify →</button>
+        <button onclick="resetCreatorVerify()" style="background:#fff;border:1.5px solid #e5e5e5;color:#666;padding:13px 20px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer">↺ Reset</button>
+      </div>
+    </div>
+    <div id="creator-verify-result" style="background:#f9fafb;border:1px solid #e5e5e5;border-radius:12px;padding:24px;min-height:200px">
+      <div style="font-size:15px;font-weight:700;color:#888;margin-bottom:16px">Verification Report</div>
+      <div id="creator-verify-empty" style="text-align:center;padding:40px 0;color:#888;font-size:14px">
+        <div style="font-size:32px;margin-bottom:12px">🔍</div>
+        Paste a sample and click Run Verify.
+      </div>
+      <div id="creator-verify-output" style="display:none"></div>
+    </div>
   </div>
 </div>
 
@@ -371,25 +388,52 @@ function showLicences(key){
 }
 function closeLicModal(){document.getElementById('licModal').classList.remove('show');}
 
+function resetCreatorVerify(){
+  document.getElementById('creator-verify-input').value='';
+  document.getElementById('creator-verify-empty').style.display='block';
+  document.getElementById('creator-verify-output').style.display='none';
+  document.getElementById('creator-verify-output').innerHTML='';
+}
+
 async function runCreatorVerify(){
   const sample=document.getElementById('creator-verify-input').value.trim();
-  const div=document.getElementById('creator-verify-result');
-  if(!sample){div.style.display='block';div.innerHTML='<p style="color:#dc2626;font-size:13px">Please paste a data sample first.</p>';return;}
-  div.style.display='block';div.innerHTML='<p style="color:#888;font-size:13px">Checking...</p>';
+  const empty=document.getElementById('creator-verify-empty');
+  const out=document.getElementById('creator-verify-output');
+  if(!sample){
+    document.getElementById('creator-verify-input').style.borderColor='#dc2626';
+    setTimeout(()=>document.getElementById('creator-verify-input').style.borderColor='#e5e5e5',2000);
+    return;
+  }
+  empty.style.display='none';
+  out.style.display='block';
+  out.innerHTML='<p style="color:#888;font-size:13px;text-align:center;padding:20px">Checking...</p>';
   try{
     const r=await fetch(API+'/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sample})});
     const d=await r.json();
     if(d.findings&&d.findings.length>0){
-      div.innerHTML=`<div style="background:#dcfce7;border:1px solid #86efac;border-radius:10px;padding:16px;font-size:13px">
-        <strong style="color:#16a34a">✓ Match found</strong><br><br>
-        ${d.findings.map(f=>`<div style="margin-bottom:8px"><strong>${f.licence_id}</strong> — ${f.buyer} · ${f.dataset}<br>${f.statement}</div>`).join('')}
-        <div style="color:#888;margin-top:12px;font-size:12px">Patent Pending · Singapore 10202602847U</div>
-      </div>`;
+      out.innerHTML=`
+        <div style="background:#f9fafb;border:1px solid #e5e5e5;border-radius:8px;padding:12px;margin-bottom:12px;font-size:13px">
+          <div style="display:flex;justify-content:space-between"><span style="color:#888">Records submitted</span><strong>${d.records_submitted}</strong></div>
+          <div style="display:flex;justify-content:space-between;margin-top:4px"><span style="color:#888">Records recognised</span><strong>${d.records_recognised} (${d.recognised_pct}%)</strong></div>
+        </div>
+        ${d.findings.length>1?`<div style="background:#eef2ff;border:1px solid #c7d2fe;border-radius:8px;padding:10px;font-size:12px;color:#6366f1;font-weight:500;margin-bottom:10px">⚡ ${d.findings.length} licence marks detected in this sample</div>`:''}
+        ${d.findings.map(f=>`
+          <div style="background:#fff;border:1.5px solid #86efac;border-left:4px solid #16a34a;border-radius:8px;padding:14px;margin-bottom:10px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <span style="font-size:11px;font-weight:700;color:#16a34a">✓ FINDING</span>
+              <span style="background:#dcfce7;color:#16a34a;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600">High Confidence</span>
+            </div>
+            <div style="font-size:15px;font-weight:700;font-family:monospace;color:#111;margin-bottom:4px">${f.licence_id}</div>
+            <div style="font-size:12px;color:#666;margin-bottom:8px">Buyer: ${f.buyer} · ${f.dataset||'PII 65K'}</div>
+            <div style="font-size:12px;background:#f0fdf4;padding:10px;border-radius:6px;color:#374151;line-height:1.5">${f.statement}</div>
+          </div>`).join('')}
+        <div style="font-size:11px;color:#888;margin-top:10px;padding-top:10px;border-top:1px solid #f3f4f6;line-height:1.5">⚖️ Whether this use complies with licence terms is a separate legal determination. This report confirms licence origin only.</div>
+        <div style="font-size:11px;color:#aaa;text-align:center;margin-top:8px">Patent Pending · Singapore 10202602847U</div>`;
     } else {
-      div.innerHTML='<div style="background:#f9fafb;border:1px solid #e5e5e5;border-radius:10px;padding:16px;font-size:13px;color:#666">No match found in registered 2bid licences for this sample.</div>';
+      out.innerHTML='<div style="background:#f9fafb;border:1px solid #e5e5e5;border-radius:10px;padding:20px;font-size:13px;color:#888;text-align:center">⚠️ No registered 2bid licences match this sample.</div>';
     }
   } catch(e){
-    div.innerHTML='<p style="color:#dc2626;font-size:13px">Verification service unavailable. Please try again.</p>';
+    out.innerHTML='<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:10px;padding:16px;font-size:13px;color:#dc2626">Verification service unavailable. Please try again in a moment.</div>';
   }
 }
 </script>
