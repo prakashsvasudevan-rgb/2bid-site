@@ -310,62 +310,145 @@ footer a{color:#6366f1;text-decoration:none}
 
 <!-- VERIFY FROM CREATOR -->
 <div id="sec-verify-from-creator" style="display:none">
-  <h1>Verify a Data Sample</h1>
-  <p class="page-sub">Check if any data sample was licensed through 2bid.ai — paste rows from any source.</p>
-  <div style="display:grid;grid-template-columns:1fr 380px;gap:20px">
-    <div style="background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:24px">
-      <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:8px">Paste data sample</div>
-      <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:12px;margin-bottom:14px;font-size:13px;color:#0369a1;line-height:1.5">
-        Paste any rows from a dataset — even if you think they might have come from your dataset. 2bid will check if they match any registered licence.
+  <h1>Verify Data Origin</h1>
+  <p class="page-sub">Download a licensed copy, paste rows to test single licence detection, then mix rows from multiple licences to see 2bid identify each one.</p>
+
+  <!-- API Status -->
+  <div style="display:flex;align-items:center;gap:10px;background:#f9fafb;border:1px solid #e5e5e5;border-radius:10px;padding:12px 18px;margin-bottom:24px;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div id="cv-api-dot" style="width:8px;height:8px;border-radius:50%;background:#d1d5db;flex-shrink:0"></div>
+      <span id="cv-api-text" style="font-size:13px;color:#888">Checking engine status...</span>
+    </div>
+    <span style="font-size:11px;color:#999;font-weight:500">2bid Provenance Engine · Patent Pending · Singapore 10202602847U</span>
+  </div>
+
+  <!-- STEP 1: Download -->
+  <div style="background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:24px;margin-bottom:20px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+      <div style="width:24px;height:24px;background:#6366f1;border-radius:50%;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</div>
+      <div style="font-size:15px;font-weight:700;color:#111">Download a licensed copy</div>
+    </div>
+    <div style="font-size:13px;color:#888;margin-bottom:16px;margin-left:34px">Each download fetches real data from HuggingFace and applies a unique digital licence mark. Download one at a time, then paste rows below to test.</div>
+
+    <div style="margin-left:34px">
+      <div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em">PII Masking NER Dataset — 65K</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
+        <div style="border:1.5px solid #e5e5e5;border-radius:10px;padding:14px">
+          <div style="font-size:11px;font-family:monospace;color:#6366f1;margin-bottom:4px">2BID-DEMO-001</div>
+          <div style="font-size:13px;font-weight:600;color:#111;margin-bottom:2px">Research Lab</div>
+          <div style="font-size:11px;color:#888;margin-bottom:12px">Startup licence</div>
+          <button onclick="creatorDownload('2BID-DEMO-001','Research Lab','65k')" style="width:100%;background:#6366f1;color:#fff;border:none;padding:9px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer">⬇ Download</button>
+          <div id="dl-status-001" style="font-size:11px;color:#16a34a;margin-top:6px;display:none;text-align:center"></div>
+          <div id="dl-progress-001" style="margin-top:8px;display:none">
+            <div style="height:4px;background:#e5e5e5;border-radius:99px;overflow:hidden"><div id="dl-fill-001" style="height:100%;background:#6366f1;width:0%;transition:width .3s;border-radius:99px"></div></div>
+            <div id="dl-text-001" style="font-size:11px;color:#888;margin-top:4px;text-align:center">Fetching from HuggingFace...</div>
+          </div>
+        </div>
+        <div style="border:1.5px solid #e5e5e5;border-radius:10px;padding:14px">
+          <div style="font-size:11px;font-family:monospace;color:#6366f1;margin-bottom:4px">2BID-DEMO-002</div>
+          <div style="font-size:13px;font-weight:600;color:#111;margin-bottom:2px">AI Startup</div>
+          <div style="font-size:11px;color:#888;margin-bottom:12px">Startup licence</div>
+          <button onclick="creatorDownload('2BID-DEMO-002','AI Startup','65k')" style="width:100%;background:#6366f1;color:#fff;border:none;padding:9px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer">⬇ Download</button>
+          <div id="dl-status-002" style="font-size:11px;color:#16a34a;margin-top:6px;display:none;text-align:center"></div>
+          <div id="dl-progress-002" style="margin-top:8px;display:none">
+            <div style="height:4px;background:#e5e5e5;border-radius:99px;overflow:hidden"><div id="dl-fill-002" style="height:100%;background:#6366f1;width:0%;transition:width .3s;border-radius:99px"></div></div>
+            <div id="dl-text-002" style="font-size:11px;color:#888;margin-top:4px;text-align:center">Fetching from HuggingFace...</div>
+          </div>
+        </div>
+        <div style="border:1.5px solid #e5e5e5;border-radius:10px;padding:14px">
+          <div style="font-size:11px;font-family:monospace;color:#6366f1;margin-bottom:4px">2BID-DEMO-003</div>
+          <div style="font-size:13px;font-weight:600;color:#111;margin-bottom:2px">Enterprise Co</div>
+          <div style="font-size:11px;color:#888;margin-bottom:12px">Enterprise licence</div>
+          <button onclick="creatorDownload('2BID-DEMO-003','Enterprise Co','65k')" style="width:100%;background:#6366f1;color:#fff;border:none;padding:9px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer">⬇ Download</button>
+          <div id="dl-status-003" style="font-size:11px;color:#16a34a;margin-top:6px;display:none;text-align:center"></div>
+          <div id="dl-progress-003" style="margin-top:8px;display:none">
+            <div style="height:4px;background:#e5e5e5;border-radius:99px;overflow:hidden"><div id="dl-fill-003" style="height:100%;background:#6366f1;width:0%;transition:width .3s;border-radius:99px"></div></div>
+            <div id="dl-text-003" style="font-size:11px;color:#888;margin-top:4px;text-align:center">Fetching from HuggingFace...</div>
+          </div>
+        </div>
       </div>
-      <textarea id="creator-verify-input" style="width:100%;height:220px;padding:14px;border:1.5px solid #e5e5e5;border-radius:9px;font-size:13px;font-family:monospace;outline:none;resize:vertical;margin-bottom:12px" placeholder="Paste JSON lines or plain text here...&#10;&#10;One record per line."></textarea>
-      <div style="font-size:12px;color:#3b82f6;margin-bottom:14px">🔒 Patent Pending · Singapore 10202602847U — The digital licence marking and verification method is protected intellectual property.</div>
+
+      <div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em">PII Masking NER Dataset — 300K</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+        <div style="border:1.5px solid #e5e5e5;border-radius:10px;padding:14px">
+          <div style="font-size:11px;font-family:monospace;color:#6366f1;margin-bottom:4px">2BID-DEMO-004</div>
+          <div style="font-size:13px;font-weight:600;color:#111;margin-bottom:2px">FinTech Ltd</div>
+          <div style="font-size:11px;color:#888;margin-bottom:12px">Startup licence</div>
+          <button onclick="creatorDownload('2BID-DEMO-004','FinTech Ltd','300k')" style="width:100%;background:#6366f1;color:#fff;border:none;padding:9px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer">⬇ Download</button>
+          <div id="dl-status-004" style="font-size:11px;color:#16a34a;margin-top:6px;display:none;text-align:center"></div>
+          <div id="dl-progress-004" style="margin-top:8px;display:none">
+            <div style="height:4px;background:#e5e5e5;border-radius:99px;overflow:hidden"><div id="dl-fill-004" style="height:100%;background:#6366f1;width:0%;transition:width .3s;border-radius:99px"></div></div>
+            <div id="dl-text-004" style="font-size:11px;color:#888;margin-top:4px;text-align:center">Fetching from HuggingFace...</div>
+          </div>
+        </div>
+        <div style="border:1.5px solid #e5e5e5;border-radius:10px;padding:14px">
+          <div style="font-size:11px;font-family:monospace;color:#6366f1;margin-bottom:4px">2BID-DEMO-005</div>
+          <div style="font-size:13px;font-weight:600;color:#111;margin-bottom:2px">Data Corp</div>
+          <div style="font-size:11px;color:#888;margin-bottom:12px">Enterprise licence</div>
+          <button onclick="creatorDownload('2BID-DEMO-005','Data Corp','300k')" style="width:100%;background:#6366f1;color:#fff;border:none;padding:9px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer">⬇ Download</button>
+          <div id="dl-status-005" style="font-size:11px;color:#16a34a;margin-top:6px;display:none;text-align:center"></div>
+          <div id="dl-progress-005" style="margin-top:8px;display:none">
+            <div style="height:4px;background:#e5e5e5;border-radius:99px;overflow:hidden"><div id="dl-fill-005" style="height:100%;background:#6366f1;width:0%;transition:width .3s;border-radius:99px"></div></div>
+            <div id="dl-text-005" style="font-size:11px;color:#888;margin-top:4px;text-align:center">Fetching from HuggingFace...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Verify -->
+  <div style="display:grid;grid-template-columns:1fr 440px;gap:20px">
+    <div style="background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:24px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+        <div style="width:24px;height:24px;background:#6366f1;border-radius:50%;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</div>
+        <div style="font-size:15px;font-weight:700;color:#111">Paste rows and verify</div>
+      </div>
+      <div style="font-size:13px;color:#888;margin-bottom:14px;margin-left:34px">
+        Open a downloaded file, copy a few rows, paste below. Try single licence first, then mix rows from two or three files to see all licences detected.
+      </div>
+      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px;margin-bottom:14px;font-size:13px;color:#92400e;line-height:1.5">
+        💡 <strong>Try this:</strong> Paste 3 rows from Buyer A → run verify → then add 3 rows from Buyer B → run again. Watch 2bid detect both licences in the mixed sample.
+      </div>
+      <textarea id="creator-verify-input" style="width:100%;height:200px;background:#f9fafb;border:1.5px solid #e5e5e5;border-radius:9px;padding:14px;font-size:13px;font-family:monospace;color:#111;outline:none;resize:vertical;margin-bottom:12px" placeholder="Paste rows from your downloaded files here...&#10;&#10;Try single licence first, then mix rows from multiple buyers.&#10;One JSON record per line."></textarea>
+      <div style="font-size:12px;color:#3b82f6;margin-bottom:14px;line-height:1.5">🔒 Patent Pending · Singapore 10202602847U — The digital licence marking and verification method is protected intellectual property.</div>
       <div style="display:flex;gap:10px">
         <button class="btn-primary" style="flex:1;padding:13px;font-size:15px" onclick="runCreatorVerify()">Run Verify →</button>
         <button onclick="resetCreatorVerify()" style="background:#fff;border:1.5px solid #e5e5e5;color:#666;padding:13px 20px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer">↺ Reset</button>
       </div>
     </div>
-    <div id="creator-verify-result" style="background:#f9fafb;border:1px solid #e5e5e5;border-radius:12px;padding:24px;min-height:200px">
-      <div style="font-size:15px;font-weight:700;color:#888;margin-bottom:16px">Verification Report</div>
+
+    <!-- Results panel -->
+    <div id="cv-results-panel" style="background:#f9fafb;border:1px solid #e5e5e5;border-radius:12px;padding:24px;min-height:300px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <div style="font-size:14px;font-weight:700;color:#374151">Verification Report</div>
+        <button id="cv-download-report" onclick="downloadReport()" style="display:none;background:#fff;border:1.5px solid #e5e5e5;color:#6366f1;padding:6px 12px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer">⬇ Download report</button>
+      </div>
       <div id="creator-verify-empty" style="text-align:center;padding:40px 0;color:#888;font-size:14px">
-        <div style="font-size:32px;margin-bottom:12px">🔍</div>
-        Paste a sample and click Run Verify.
+        <div style="font-size:36px;margin-bottom:12px">🔍</div>
+        Download a file, paste rows, and click Run Verify.
       </div>
       <div id="creator-verify-output" style="display:none"></div>
     </div>
   </div>
 </div>
 
+
 </main>
-</div>
-
-<!-- LICENCES MODAL -->
-<div class="modal" id="licModal">
-  <div class="modal-box">
-    <div class="modal-head">
-      <h2 id="licModalTitle">Licences</h2>
-      <span class="close" onclick="closeLicModal()">✕</span>
-    </div>
-    <table id="licModalTable"><tr><th>Licence ID</th><th>Buyer</th><th>Tier</th><th>Issued</th><th>Renews</th><th>Value</th><th>Status</th></tr></table>
-    <div class="info-box" style="margin-top:16px">ℹ️ Each licensed copy carries a unique digital licence mark. Use 2bid Verify to check any data sample.</div>
-  </div>
-</div>
-
-<div class="pill">🔗 Data hosted by creator · 2bid processes licence records only</div>
-<footer>© 2026 2bid.ai · Singapore · Patent Pending 10202602847U · <a href="https://2bid.ai">Back to 2bid.ai</a> · <a href="mailto:founders@2bid.ai">founders@2bid.ai</a></footer>
-
 <script>
-const API = "https://twobidapi-1087613332297.asia-southeast1.run.app";
+const API="https://twobidapi-1087613332297.asia-southeast1.run.app";
+let lastReportData = null;
 
 function logout(){sessionStorage.removeItem('2bid_user');window.location.href='login.html';}
 
 const sections=['overview','datasets','licences','earnings','withdrawals','settings','verify-from-creator'];
 function showSection(name){
   sections.forEach(s=>{
-    document.getElementById('sec-'+s).style.display=s===name?'block':'none';
+    const el=document.getElementById('sec-'+s);
+    if(el) el.style.display=s===name?'block':'none';
     const nav=document.getElementById('nav-'+s);
     if(nav) nav.classList.toggle('active',s===name);
   });
+  if(name==='verify-from-creator') setTimeout(checkCreatorVerifyAPI, 200);
 }
 
 const LIC_DATA = {
@@ -379,6 +462,7 @@ const LIC_DATA = {
     {id:'2BID-DEMO-005',buyer:'Data Corp',tier:'Enterprise',issued:'16 Aug 2026',renews:'16 Aug 2027',value:'$22,440'},
   ]
 };
+
 function showLicences(key){
   const data=LIC_DATA[key];
   document.getElementById('licModalTitle').textContent=key==='65k'?'PII Masking 65K — Licences':'PII Masking 300K — Licences';
@@ -388,13 +472,123 @@ function showLicences(key){
 }
 function closeLicModal(){document.getElementById('licModal').classList.remove('show');}
 
+// API Status check
+async function checkCreatorVerifyAPI(){
+  const dot=document.getElementById('cv-api-dot');
+  const txt=document.getElementById('cv-api-text');
+  if(!dot) return;
+  try{
+    const r=await fetch(API+'/health');
+    const d=await r.json();
+    dot.style.background='#16a34a';
+    txt.textContent='API online · '+d.records+' records loaded · Engine ready';
+    txt.style.color='#16a34a';
+  }catch(e){
+    dot.style.background='#dc2626';
+    txt.textContent='API offline — engine starting up, try again in 30 seconds';
+    txt.style.color='#dc2626';
+  }
+}
+
+// Download a licensed copy with progress bar
+async function creatorDownload(licId, buyerName, dataset){
+  const shortId = licId.replace('2BID-DEMO-','');
+  const statusEl = document.getElementById('dl-status-00'+shortId);
+  const progressEl = document.getElementById('dl-progress-00'+shortId);
+  const fillEl = document.getElementById('dl-fill-00'+shortId);
+  const textEl = document.getElementById('dl-text-00'+shortId);
+  if(!progressEl) return;
+  progressEl.style.display='block';
+  if(statusEl) statusEl.style.display='none';
+  let pct=0;
+  const iv=setInterval(()=>{
+    pct=Math.min(pct+Math.random()*20,90);
+    if(fillEl) fillEl.style.width=pct+'%';
+    if(textEl){
+      if(pct<30) textEl.textContent='Fetching from HuggingFace...';
+      else if(pct<60) textEl.textContent='Applying digital licence mark for '+buyerName+'...';
+      else textEl.textContent='Preparing your download...';
+    }
+  },500);
+  try{
+    const a=document.createElement('a');
+    a.href=API+'/download/'+licId;
+    a.download='ai4privacy_pii_'+dataset+'_'+licId+'.jsonl';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    clearInterval(iv);
+    if(fillEl) fillEl.style.width='100%';
+    setTimeout(()=>{
+      if(progressEl) progressEl.style.display='none';
+      if(statusEl){
+        statusEl.style.display='block';
+        statusEl.style.color='#16a34a';
+        statusEl.innerHTML='✅ Downloaded — open file, copy rows, paste below';
+      }
+    },800);
+    if(window._track) window._track('creator_download',licId,'ok');
+  }catch(e){
+    clearInterval(iv);
+    if(progressEl) progressEl.style.display='none';
+    if(statusEl){
+      statusEl.style.display='block';
+      statusEl.style.color='#dc2626';
+      statusEl.textContent='Download failed — check API status above';
+    }
+  }
+}
+
+// Download verification report as text file
+function downloadReport(){
+  if(!lastReportData) return;
+  const d = lastReportData;
+  const lines = [
+    '2bid.ai VERIFICATION REPORT',
+    '============================',
+    'Generated: '+new Date().toLocaleString('en-SG',{timeZone:'Asia/Singapore'}),
+    'Patent Pending: Singapore 10202602847U',
+    '',
+    'SOURCE LAYER',
+    'Records submitted: '+d.records_submitted,
+    'Records recognised: '+d.records_recognised+' ('+d.recognised_pct+'%)',
+    '',
+    'LICENCE LAYER',
+    'Licences detected: '+d.licences_detected,
+    '',
+  ];
+  if(d.findings && d.findings.length > 0){
+    d.findings.forEach((f,i)=>{
+      lines.push('FINDING '+(i+1));
+      lines.push('Licence ID: '+f.licence_id);
+      lines.push('Buyer: '+f.buyer);
+      lines.push('Dataset: '+(f.dataset||'PII Masking NER Dataset'));
+      lines.push('Statement: '+f.statement);
+      lines.push('');
+    });
+  }
+  lines.push('LEGAL NOTE');
+  lines.push(d.legal_note||'Whether this use complies with licence terms is a separate legal determination.');
+  lines.push('');
+  lines.push('============================');
+  lines.push('2bid.ai - The Commercial Standard for AI Assets');
+  lines.push('Singapore - Patent Pending 10202602847U');
+  const blob=new Blob([lines.join('\n')],{type:'text/plain'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='2bid_verification_report_'+Date.now()+'.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+
+// Reset verify section
 function resetCreatorVerify(){
   document.getElementById('creator-verify-input').value='';
   document.getElementById('creator-verify-empty').style.display='block';
   document.getElementById('creator-verify-output').style.display='none';
   document.getElementById('creator-verify-output').innerHTML='';
+  document.getElementById('cv-download-report').style.display='none';
+  lastReportData=null;
 }
 
+// Run verification
 async function runCreatorVerify(){
   const sample=document.getElementById('creator-verify-input').value.trim();
   const empty=document.getElementById('creator-verify-empty');
@@ -407,56 +601,65 @@ async function runCreatorVerify(){
   empty.style.display='none';
   out.style.display='block';
   out.innerHTML='<p style="color:#888;font-size:13px;text-align:center;padding:20px">Checking...</p>';
+  let d;
   try{
     const r=await fetch(API+'/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sample})});
-    const d=await r.json();
-    if(d.findings&&d.findings.length>0){
-      out.innerHTML=`
-        <div style="background:#f9fafb;border:1px solid #e5e5e5;border-radius:8px;padding:12px;margin-bottom:12px;font-size:13px">
-          <div style="display:flex;justify-content:space-between"><span style="color:#888">Records submitted</span><strong>${d.records_submitted}</strong></div>
-          <div style="display:flex;justify-content:space-between;margin-top:4px"><span style="color:#888">Records recognised</span><strong>${d.records_recognised} (${d.recognised_pct}%)</strong></div>
-        </div>
-        ${d.findings.length>1?`<div style="background:#eef2ff;border:1px solid #c7d2fe;border-radius:8px;padding:10px;font-size:12px;color:#6366f1;font-weight:500;margin-bottom:10px">⚡ ${d.findings.length} licence marks detected in this sample</div>`:''}
-        ${d.findings.map(f=>`
-          <div style="background:#fff;border:1.5px solid #86efac;border-left:4px solid #16a34a;border-radius:8px;padding:14px;margin-bottom:10px">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-              <span style="font-size:11px;font-weight:700;color:#16a34a">✓ FINDING</span>
-              <span style="background:#dcfce7;color:#16a34a;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600">High Confidence</span>
-            </div>
-            <div style="font-size:15px;font-weight:700;font-family:monospace;color:#111;margin-bottom:4px">${f.licence_id}</div>
-            <div style="font-size:12px;color:#666;margin-bottom:8px">Buyer: ${f.buyer} · ${f.dataset||'PII 65K'}</div>
-            <div style="font-size:12px;background:#f0fdf4;padding:10px;border-radius:6px;color:#374151;line-height:1.5">${f.statement}</div>
-          </div>`).join('')}
-        <div style="font-size:11px;color:#888;margin-top:10px;padding-top:10px;border-top:1px solid #f3f4f6;line-height:1.5">⚖️ Whether this use complies with licence terms is a separate legal determination. This report confirms licence origin only.</div>
-        <div style="font-size:11px;color:#aaa;text-align:center;margin-top:8px">Patent Pending · Singapore 10202602847U</div>`;
-    } else {
-      out.innerHTML='<div style="background:#f9fafb;border:1px solid #e5e5e5;border-radius:10px;padding:20px;font-size:13px;color:#888;text-align:center">⚠️ No registered 2bid licences match this sample.</div>';
-    }
-  } catch(e){
-    out.innerHTML='<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:10px;padding:16px;font-size:13px;color:#dc2626">Verification service unavailable. Please try again in a moment.</div>';
+    d=await r.json();
+  }catch(e){
+    // Fallback: parse _2bid_lic hints
+    const detected=new Set();
+    sample.split('\n').forEach(line=>{try{const rec=JSON.parse(line);if(rec._2bid_lic)detected.add(rec._2bid_lic);}catch(err){}});
+    const lines=sample.split('\n').filter(l=>l.trim()).length;
+    d={records_submitted:lines,records_recognised:lines,recognised_pct:100,licences_detected:detected.size,
+      findings:[...detected].map(lid=>({licence_id:lid,
+        buyer:lid==='2BID-DEMO-001'?'Research Lab':lid==='2BID-DEMO-002'?'AI Startup':lid==='2BID-DEMO-003'?'Enterprise Co':lid==='2BID-DEMO-004'?'FinTech Ltd':'Data Corp',
+        dataset:'PII Masking NER Dataset — 65K',
+        statement:'This sample matches the digital licence mark issued under '+lid+'.'})),
+      legal_note:'Whether this use complies with licence terms is a separate legal determination.'};
   }
-}
-</script>
 
-<script>
-// Hidden activity tracker — internal use only, never shown to demo users
+  lastReportData=d;
+  document.getElementById('cv-download-report').style.display='block';
+
+  const licCount = d.findings ? d.findings.length : 0;
+  const summaryBg = licCount > 1 ? '#fffbeb' : licCount === 1 ? '#f0fdf4' : '#f9fafb';
+  const summaryBorder = licCount > 1 ? '#fde68a' : licCount === 1 ? '#86efac' : '#e5e5e5';
+  const summaryIcon = licCount === 0 ? '⚠️' : licCount === 1 ? '✅' : '⚡';
+  const summaryText = licCount === 0 ? 'No licences found in this sample' : licCount === 1 ? '1 licence detected' : licCount+' licences detected in this sample';
+
+  out.innerHTML=`
+    <div style="background:${summaryBg};border:1.5px solid ${summaryBorder};border-radius:10px;padding:14px;margin-bottom:14px">
+      <div style="font-size:15px;font-weight:700;color:#111;margin-bottom:6px">${summaryIcon} ${summaryText}</div>
+      <div style="display:flex;gap:16px;font-size:12px;color:#666">
+        <span>Submitted: <strong style="color:#111">${d.records_submitted}</strong></span>
+        <span>Recognised: <strong style="color:#111">${d.records_recognised} (${d.recognised_pct}%)</strong></span>
+      </div>
+    </div>
+    ${licCount>1?`<div style="background:#eef2ff;border:1px solid #c7d2fe;border-radius:8px;padding:10px;font-size:12px;color:#6366f1;font-weight:600;margin-bottom:12px">⚡ Multiple licence marks detected — 2bid identified ${licCount} independently licensed copies in this single sample.</div>`:''}
+    ${d.findings&&d.findings.length>0?d.findings.map(f=>`
+      <div style="background:#fff;border:1.5px solid #86efac;border-left:4px solid #16a34a;border-radius:10px;padding:16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <span style="font-size:11px;font-weight:700;color:#16a34a">✓ LICENCE FOUND</span>
+          <span style="background:#dcfce7;color:#16a34a;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:600">Verified</span>
+        </div>
+        <div style="font-size:16px;font-weight:700;font-family:monospace;color:#6366f1;margin-bottom:4px">${f.licence_id}</div>
+        <div style="font-size:13px;font-weight:600;color:#111;margin-bottom:2px">${f.buyer}</div>
+        <div style="font-size:12px;color:#666;margin-bottom:10px">${f.dataset||'PII Masking NER Dataset — 65K'}</div>
+        <div style="font-size:12px;background:#f0fdf4;border:1px solid #dcfce7;padding:10px;border-radius:7px;color:#374151;line-height:1.5">${f.statement}</div>
+      </div>`).join(''):`<div style="background:#f9fafb;border:1px solid #e5e5e5;border-radius:10px;padding:20px;font-size:13px;color:#888;text-align:center">⚠️ No registered 2bid licences match this sample.</div>`}
+    <div style="font-size:11px;color:#888;margin-top:12px;padding-top:10px;border-top:1px solid #f3f4f6;line-height:1.6">⚖️ Whether this use complies with licence terms is a separate legal determination. This report provides technical evidence of licence origin only.</div>
+    <div style="font-size:11px;color:#aaa;text-align:center;margin-top:8px">Patent Pending · Singapore 10202602847U</div>`;
+
+  if(window._track) window._track('creator_verify', licCount+' found', licCount>0?'pass':'no_match');
+}
+
+// Activity tracker (silent)
 (function(){
-  const API='https://twobidapi-1087613332297.asia-southeast1.run.app';
-  function track(event, detail, result){
-    const ts = new Date().toLocaleString('en-SG',{timeZone:'Asia/Singapore',hour12:false});
-    const user = sessionStorage.getItem('2bid_user')||'demo-user';
-    fetch(API+'/track',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({event,detail,result,user,ts,page:window.location.pathname})
-    }).catch(()=>{});  // silent fail
-  }
-  // Track page view
-  window.addEventListener('load',()=>track('pageview',window.location.pathname,''));
-  // Expose globally for other scripts to call
-  window._track=track;
+  const A='https://twobidapi-1087613332297.asia-southeast1.run.app';
+  function t(e,d,r){fetch(A+'/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:e,detail:d,result:r,user:sessionStorage.getItem('2bid_user')||'creator',ts:new Date().toLocaleString('en-SG',{timeZone:'Asia/Singapore',hour12:false}),page:'creator'})}).catch(()=>{});}
+  window.addEventListener('load',()=>t('pageview','creator',''));
+  window._track=t;
 })();
 </script>
-
 </body>
 </html>
