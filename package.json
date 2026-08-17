@@ -1,0 +1,14 @@
+{
+  "name": "2bid-site",
+  "version": "1.0.0",
+  "description": "Commercial Licensing for AI Datasets",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build required'",
+    "lint": "echo 'No linter configured'"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.1.1"
+  }
+}
