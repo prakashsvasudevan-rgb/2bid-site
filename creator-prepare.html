@@ -537,4 +537,56 @@ document.querySelectorAll('button').forEach(b=>{
 });
 document.querySelectorAll('.back').forEach(x=>{x.style.cursor='pointer';x.onclick=()=>location.href='creator-import.html';});
 </script>
+
+<script id="2bid-synthetic-pii-demo-override">
+/*
+  Demo display override only.
+  Original Hugging Face source/provenance remains unchanged.
+*/
+(function () {
+  const DEMO_TITLE = "Synthetic PII Masking 65K";
+  const DEMO_DESCRIPTION =
+    "A multilingual synthetic PII dataset for PII detection, masking and privacy-focused AI workflows. The dataset uses synthetic examples and does not represent real personal data.";
+
+  function apply2bidDemoOverride() {
+    // Creator-editable listing fields.
+    const titleInput =
+      document.querySelector('#datasetTitle') ||
+      document.querySelector('input[name="datasetTitle"]') ||
+      document.querySelector('input[name="title"]');
+
+    const descriptionInput =
+      document.querySelector('#shortDescription') ||
+      document.querySelector('#datasetDescription') ||
+      document.querySelector('textarea[name="shortDescription"]') ||
+      document.querySelector('textarea[name="description"]');
+
+    if (titleInput) titleInput.value = DEMO_TITLE;
+    if (descriptionInput) descriptionInput.value = DEMO_DESCRIPTION;
+
+    // Buyer-facing live preview.
+    const preview = document.querySelector('.preview');
+    if (preview) {
+      const h3 = preview.querySelector('h3');
+      const p = preview.querySelector('p');
+      if (h3) h3.textContent = DEMO_TITLE;
+      if (p) p.textContent = DEMO_DESCRIPTION;
+    }
+
+    // Do NOT modify #sourceRepo or other Hugging Face provenance fields.
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      // Run after the page's normal import population code.
+      setTimeout(apply2bidDemoOverride, 250);
+      setTimeout(apply2bidDemoOverride, 1000);
+    });
+  } else {
+    setTimeout(apply2bidDemoOverride, 250);
+    setTimeout(apply2bidDemoOverride, 1000);
+  }
+})();
+</script>
+
 </body></html>
