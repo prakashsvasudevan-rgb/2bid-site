@@ -1,0 +1,123 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>2bid.ai — Discover Data</title>
+
+<meta name="description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://2bid.ai/buyer-discover.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="2bid.ai">
+<meta property="og:title" content="2bid.ai — Discover Data">
+<meta property="og:description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+<meta property="og:url" content="https://2bid.ai/buyer-discover.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2bid.ai — Discover Data">
+<meta name="twitter:description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:#111831;background:#fafbfe;font-size:14px}
+a{text-decoration:none;color:inherit}button{font:inherit}nav{height:70px;background:#fff;border-bottom:1px solid #e9edf4;display:flex;align-items:center;justify-content:space-between;padding:0 30px}
+.logo{font-size:30px;font-weight:900;background:linear-gradient(90deg,#563af4,#1682ff);-webkit-background-clip:text;color:transparent}
+.links{display:flex;gap:22px;align-items:center;font-size:12px;font-weight:800}.pill{border:1px solid #dfe3ed;padding:9px 12px;border-radius:9px}
+.wrap{max-width:1160px;margin:auto;padding:30px 28px 55px}.back{font-size:10px;color:#758096;font-weight:800}.ey{font-size:10px;font-weight:900;color:#563af4;text-transform:uppercase}
+h1{font-size:32px;letter-spacing:-.04em;margin:7px 0}.lead{font-size:12px;color:#6d778c;line-height:1.6;max-width:760px}
+.progress{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin:20px 0}.step{padding:10px;border:1px solid #e5e8f0;border-radius:10px;font-size:9px;color:#7a8396;background:#fff}.step b{display:block;color:#1c243e;font-size:10px}.step.done{background:#f1fcf6;border-color:#c9ead8}.step.active{background:#f2efff;border-color:#9e8dff}
+.card{background:#fff;border:1px solid #e6e9f1;border-radius:15px;padding:18px}.demo{padding:12px 14px;border:1px solid #e4defe;border-radius:11px;background:#f8f6ff;font-size:10px;color:#706981;margin-bottom:14px}
+.primary{display:inline-block;background:linear-gradient(135deg,#5a3df6,#2918df);color:#fff;border:0;border-radius:9px;padding:11px 14px;font-size:10px;font-weight:900;cursor:pointer}
+.secondary{display:inline-block;background:#fff;color:#202842;border:1px solid #dfe3ed;border-radius:9px;padding:10px 13px;font-size:10px;font-weight:800;cursor:pointer}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tag{display:inline-block;padding:5px 8px;border-radius:999px;background:#f1edff;color:#563af4;font-size:8px;font-weight:900}.ok{background:#eaf9f0;color:#168654}.muted{color:#7b8497}
+.footer{display:flex;justify-content:space-between;align-items:center;margin-top:15px;padding:14px;border:1px solid #e6e9f1;border-radius:13px;background:#fff}.footer span{font-size:9px;color:#7a8497}
+@media(max-width:800px){.progress{grid-template-columns:repeat(3,1fr)}.grid3,.grid2{grid-template-columns:1fr}.links span{display:none}}
+</style>
+<style id="2bid-mobile-audit">
+/* 2bid.ai mobile launch pass */
+html,body{max-width:100%;overflow-x:hidden}
+img,video,svg,canvas{max-width:100%;height:auto}
+input,select,textarea,button{max-width:100%}
+table{max-width:100%}
+@media (max-width: 768px){
+  body{font-size:14px}
+  nav{padding-left:16px!important;padding-right:16px!important}
+  .wrap,.container,.panel-inner,.how-inner{
+    width:100%!important;
+    max-width:100%!important;
+    padding-left:16px!important;
+    padding-right:16px!important
+  }
+  h1{font-size:clamp(28px,8vw,36px)!important;line-height:1.12!important}
+  h2{line-height:1.2}
+  .grid2,.grid3,.row2,.two-col,.three-col,.layout,.shell,.how-grid,.mp-flow,.statrow{
+    grid-template-columns:1fr!important
+  }
+  .cards,.card-grid,.ds-grid{
+    grid-template-columns:1fr!important
+  }
+  .steps,.progress{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important
+  }
+  .offer,.match{
+    grid-template-columns:1fr!important
+  }
+  .hero{padding-left:18px!important;padding-right:18px!important}
+  .hero p,.lead{font-size:13px!important}
+  .card,.formcard,.side,.marketplace-three{padding:16px!important}
+  .footer,.sf-inner{
+    grid-template-columns:1fr!important;
+    flex-direction:column!important;
+    text-align:center!important;
+    gap:12px!important
+  }
+  .sf-right{text-align:center!important}
+  .nav-links li:not(:last-child){display:none!important}
+  .links span{display:none!important}
+  .path-tabs{flex-direction:column!important}
+  .ptab + .ptab{border-left:0!important;border-top:1px solid rgba(0,0,0,.06)}
+  .search-row{flex-direction:column!important}
+  .use-row{flex-direction:column!important}
+  .frow{grid-template-columns:1fr!important}
+  .m-stats{grid-template-columns:1fr 1fr!important}
+  .modal{width:94vw!important;max-height:90vh!important;padding:20px!important}
+  .mp-arrow{transform:rotate(90deg);height:18px}
+  .mp-card{min-height:auto!important}
+  .top,.head,.marketplace-three-head{
+    flex-direction:column!important;
+    align-items:flex-start!important
+  }
+  .primary,.secondary,.btn,.join,.nav-cta{
+    min-height:42px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center
+  }
+}
+@media (max-width: 430px){
+  .steps,.progress{grid-template-columns:1fr!important}
+  .m-stats{grid-template-columns:1fr!important}
+  nav .logo,.logo{font-size:24px!important}
+  .rolebar{grid-template-columns:1fr 1fr!important}
+  .chips{gap:6px!important}
+  .chip{font-size:11px!important}
+}
+</style>
+
+</head>
+<body><nav><a class="logo" href="index.html">2bid.ai</a><div class="links"><span>Browse data</span><span>How it works</span><a href="experience-demo.html">Demo journeys</a><span class="pill">Buyer demo</span></div></nav><main class="wrap"><a class="back" href="buyer-overview.html">← Buyer overview</a><div class="ey" style="margin-top:16px">BUYER JOURNEY</div><h1>Discover data</h1>
+<p class="lead">Browse the marketplace by what the data can help you do. For Demo v1, one dataset is active; the others show how discovery could look as the catalogue grows.</p><div class="progress"><div class="step active"><b>1 · Discover</b>Current</div><div class="step "><b>2 · Evaluate</b>Next</div><div class="step "><b>3 · Choose Licence</b>Next</div><div class="step "><b>4 · Verify Buyer</b>Next</div><div class="step "><b>5 · Licence & Delivery</b>Next</div><div class="step "><b>6 · Workspace</b>Next</div></div>
+<div class="card" style="margin-bottom:13px;display:flex;gap:10px;align-items:center"><div style="flex:1;border:1px solid #dfe3ed;border-radius:9px;padding:11px;color:#7d8698;font-size:10px">Search datasets, use cases, languages, formats...</div><span class="tag">Privacy</span><span class="tag">AI</span><span class="tag">Commercial-ready</span></div>
+<div class="grid3"><a class="card" href="buyer-evaluate.html"  style="min-height:185px;border-color:#a997ff">
+<span class="tag ok">DEMO DATASET</span><h2 style="font-size:15px;margin:12px 0 5px">PII Masking 65K</h2><p style="font-size:9px;color:#788296">Privacy / AI</p>
+<div style="margin-top:20px;font-size:9px;line-height:1.9"><b>21,588 rows</b><br><span class="muted">Source: Hugging Face</span></div>
+<div style="margin-top:13px;font-size:9px;font-weight:900;color:#563af4">Evaluate dataset →</div></a><a class="card" href="buyer-evaluate.html" onclick="return false" style="min-height:185px;opacity:.55">
+<span class="tag ">PLACEHOLDER</span><h2 style="font-size:15px;margin:12px 0 5px">Multilingual Support Conversations</h2><p style="font-size:9px;color:#788296">Customer Support</p>
+<div style="margin-top:20px;font-size:9px;line-height:1.9"><b>84K rows</b><br><span class="muted">Source: Public source</span></div>
+<div style="margin-top:13px;font-size:9px;font-weight:900;color:#563af4">Demo placeholder</div></a><a class="card" href="buyer-overview.html" onclick="return false" style="min-height:185px;opacity:.55">
+<span class="tag ">PLACEHOLDER</span><h2 style="font-size:15px;margin:12px 0 5px">Retail Product Attribute Set</h2><p style="font-size:9px;color:#788296">Commerce</p>
+<div style="margin-top:20px;font-size:9px;line-height:1.9"><b>120K rows</b><br><span class="muted">Source: Creator source</span></div>
+<div style="margin-top:13px;font-size:9px;font-weight:900;color:#563af4">Demo placeholder</div></a><a class="card" href="buyer-overview.html" onclick="return false" style="min-height:185px;opacity:.55">
+<span class="tag ">PLACEHOLDER</span><h2 style="font-size:15px;margin:12px 0 5px">Industrial Defect Images</h2><p style="font-size:9px;color:#788296">Computer Vision</p>
+<div style="margin-top:20px;font-size:9px;line-height:1.9"><b>42K images</b><br><span class="muted">Source: Creator source</span></div>
+<div style="margin-top:13px;font-size:9px;font-weight:900;color:#563af4">Demo placeholder</div></a><a class="card" href="buyer-overview.html" onclick="return false" style="min-height:185px;opacity:.55">
+<span class="tag ">PLACEHOLDER</span><h2 style="font-size:15px;margin:12px 0 5px">Synthetic Finance QA</h2><p style="font-size:9px;color:#788296">Finance / NLP</p>
+<div style="margin-top:20px;font-size:9px;line-height:1.9"><b>96K rows</b><br><span class="muted">Source: Public source</span></div>
+<div style="margin-top:13px;font-size:9px;font-weight:900;color:#563af4">Demo placeholder</div></a><a class="card" href="buyer-overview.html" onclick="return false" style="min-height:185px;opacity:.55">
+<span class="tag ">PLACEHOLDER</span><h2 style="font-size:15px;margin:12px 0 5px">ASEAN Logistics Events</h2><p style="font-size:9px;color:#788296">Supply Chain</p>
+<div style="margin-top:20px;font-size:9px;line-height:1.9"><b>310K rows</b><br><span class="muted">Source: Creator source</span></div>
+<div style="margin-top:13px;font-size:9px;font-weight:900;color:#563af4">Demo placeholder</div></a></div></main></body></html>

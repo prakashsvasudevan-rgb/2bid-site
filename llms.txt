@@ -1,0 +1,18 @@
+# 2bid.ai
+
+2bid.ai is a commercial marketplace and licensing layer for data creators and AI data buyers.
+
+Core marketplace paths:
+- Creators can publish datasets, prepare metadata, set licensing terms, respond to buyer opportunities, and publish commercial listings.
+- Buyers can discover listed datasets or post an AI Data Sourcing Bid describing data they need.
+- 2bid.ai provides licence verification for licences issued through 2bid.ai, connecting a submitted copy to licence evidence, the commercial licence record, and source provenance.
+
+Primary public pages:
+- https://2bid.ai/
+- https://2bid.ai/creator-overview.html
+- https://2bid.ai/buyer-overview.html
+- https://2bid.ai/verification-overview.html
+- https://2bid.ai/register.html
+
+Patent pending in Singapore.
+Singapore Patent Application No. 10202602847U.

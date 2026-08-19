@@ -1,0 +1,129 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2bid.ai — Sourcing Matches</title>
+
+<meta name="description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://2bid.ai/buyer-sourcing-match.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="2bid.ai">
+<meta property="og:title" content="2bid.ai — Sourcing Matches">
+<meta property="og:description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+<meta property="og:url" content="https://2bid.ai/buyer-sourcing-match.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2bid.ai — Sourcing Matches">
+<meta name="twitter:description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:#111831;background:#fafbfe;font-size:14px}
+a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}nav{height:70px;background:#fff;border-bottom:1px solid #e9edf4;display:flex;align-items:center;justify-content:space-between;padding:0 30px}
+.logo{font-size:30px;font-weight:900;background:linear-gradient(90deg,#563af4,#1682ff);-webkit-background-clip:text;color:transparent}
+.links{display:flex;gap:22px;align-items:center;font-size:12px;font-weight:800}.pill{border:1px solid #dfe3ed;padding:9px 12px;border-radius:9px}
+.wrap{max-width:1160px;margin:auto;padding:30px 28px 55px}.back{font-size:10px;color:#758096;font-weight:800}.ey{font-size:10px;font-weight:900;color:#563af4;text-transform:uppercase;letter-spacing:.04em}
+h1{font-size:32px;letter-spacing:-.04em;margin:7px 0}.lead{font-size:12px;color:#6d778c;line-height:1.65;max-width:800px}
+.card{background:#fff;border:1px solid #e6e9f1;border-radius:15px;padding:20px}.demo{padding:12px 14px;border:1px solid #e4defe;border-radius:11px;background:#f8f6ff;font-size:10px;color:#706981;margin:16px 0}
+.primary{display:inline-block;background:linear-gradient(135deg,#5a3df6,#2918df);color:#fff;border:0;border-radius:9px;padding:11px 14px;font-size:10px;font-weight:900;cursor:pointer}
+.secondary{display:inline-block;background:#fff;color:#202842;border:1px solid #dfe3ed;border-radius:9px;padding:10px 13px;font-size:10px;font-weight:800;cursor:pointer}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tag{display:inline-block;padding:5px 8px;border-radius:999px;background:#f1edff;color:#563af4;font-size:8px;font-weight:900}.tag.blue{background:#eef7ff;color:#1676c8}.tag.green{background:#eaf9f0;color:#168654}
+.path{position:relative;overflow:hidden;min-height:290px}.path:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(#563af4,#1682ff)}
+.path.sourcing:before{background:linear-gradient(#1682ff,#563af4)}.path h2{font-size:21px;letter-spacing:-.025em;margin:13px 0 8px}.path p{font-size:11px;color:#6d778c;line-height:1.65}
+.flow{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin:17px 0}.flow b{font-size:8px;padding:6px 8px;border-radius:7px;background:#f5f6fa;color:#37405a}.flow i{font-style:normal;color:#a7adba;font-size:9px}
+.callout{padding:14px;border-radius:11px;background:#f8f6ff;border:1px solid #e4defe;font-size:10px;color:#665f7c;line-height:1.6}
+.form{max-width:780px}.fg{margin:0 0 16px}.fg label{display:block;font-size:10px;font-weight:900;color:#303851;margin-bottom:6px}.hint{font-size:9px;color:#8a92a4;margin:-2px 0 7px}
+.fi,.fta,.fsel{width:100%;border:1px solid #dfe3ed;border-radius:9px;background:#fff;padding:11px 12px;color:#202842;outline:none;font-size:11px}.fta{min-height:100px;resize:vertical}.fi:focus,.fta:focus,.fsel:focus{border-color:#8d7cff}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.checks{display:flex;gap:9px;flex-wrap:wrap}.choice{padding:9px 11px;border:1px solid #dfe3ed;border-radius:9px;background:#fff;font-size:10px;font-weight:800}.choice.active{border-color:#9d8dff;background:#f4f1ff;color:#563af4}
+.statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:15px 0}.stat{background:#fff;border:1px solid #e6e9f1;border-radius:12px;padding:14px}.stat b{display:block;font-size:19px}.stat span{font-size:9px;color:#7a8497}
+.match{display:grid;grid-template-columns:1fr auto;gap:15px;align-items:center}.match+.match{border-top:1px solid #eef0f5;margin-top:14px;padding-top:14px}.score{font-size:20px;font-weight:900;color:#563af4}
+.offer{display:grid;grid-template-columns:1.5fr .7fr .7fr auto;gap:12px;align-items:center}.offer+.offer{border-top:1px solid #eef0f5;margin-top:14px;padding-top:14px}.small{font-size:9px;color:#7a8497;line-height:1.5}.money{font-size:16px;font-weight:900}
+.footer{display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding:14px;border:1px solid #e6e9f1;border-radius:13px;background:#fff}.footer span{font-size:9px;color:#7a8497}
+@media(max-width:800px){.grid2,.grid3,.row2,.statrow{grid-template-columns:1fr}.offer,.match{grid-template-columns:1fr}.links span{display:none}}
+</style>
+<style id="2bid-mobile-audit">
+/* 2bid.ai mobile launch pass */
+html,body{max-width:100%;overflow-x:hidden}
+img,video,svg,canvas{max-width:100%;height:auto}
+input,select,textarea,button{max-width:100%}
+table{max-width:100%}
+@media (max-width: 768px){
+  body{font-size:14px}
+  nav{padding-left:16px!important;padding-right:16px!important}
+  .wrap,.container,.panel-inner,.how-inner{
+    width:100%!important;
+    max-width:100%!important;
+    padding-left:16px!important;
+    padding-right:16px!important
+  }
+  h1{font-size:clamp(28px,8vw,36px)!important;line-height:1.12!important}
+  h2{line-height:1.2}
+  .grid2,.grid3,.row2,.two-col,.three-col,.layout,.shell,.how-grid,.mp-flow,.statrow{
+    grid-template-columns:1fr!important
+  }
+  .cards,.card-grid,.ds-grid{
+    grid-template-columns:1fr!important
+  }
+  .steps,.progress{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important
+  }
+  .offer,.match{
+    grid-template-columns:1fr!important
+  }
+  .hero{padding-left:18px!important;padding-right:18px!important}
+  .hero p,.lead{font-size:13px!important}
+  .card,.formcard,.side,.marketplace-three{padding:16px!important}
+  .footer,.sf-inner{
+    grid-template-columns:1fr!important;
+    flex-direction:column!important;
+    text-align:center!important;
+    gap:12px!important
+  }
+  .sf-right{text-align:center!important}
+  .nav-links li:not(:last-child){display:none!important}
+  .links span{display:none!important}
+  .path-tabs{flex-direction:column!important}
+  .ptab + .ptab{border-left:0!important;border-top:1px solid rgba(0,0,0,.06)}
+  .search-row{flex-direction:column!important}
+  .use-row{flex-direction:column!important}
+  .frow{grid-template-columns:1fr!important}
+  .m-stats{grid-template-columns:1fr 1fr!important}
+  .modal{width:94vw!important;max-height:90vh!important;padding:20px!important}
+  .mp-arrow{transform:rotate(90deg);height:18px}
+  .mp-card{min-height:auto!important}
+  .top,.head,.marketplace-three-head{
+    flex-direction:column!important;
+    align-items:flex-start!important
+  }
+  .primary,.secondary,.btn,.join,.nav-cta{
+    min-height:42px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center
+  }
+}
+@media (max-width: 430px){
+  .steps,.progress{grid-template-columns:1fr!important}
+  .m-stats{grid-template-columns:1fr!important}
+  nav .logo,.logo{font-size:24px!important}
+  .rolebar{grid-template-columns:1fr 1fr!important}
+  .chips{gap:6px!important}
+  .chip{font-size:11px!important}
+}
+</style>
+
+</head><body>
+<nav><a class="logo" href="index.html">2bid.ai</a><div class="links"><span>Browse data</span><span>AI Data Sourcing Bids</span><a href="experience-demo.html">Demo journeys</a><span class="pill">Buyer demo</span></div></nav>
+<main class="wrap"><a class="back" href="buyer-overview.html">← Back</a><div class="ey" style="margin-top:18px">PATH B · STEP 2</div><h1>Match the requirement to supply.</h1><p class="lead">Existing listings are checked first. If the requirement is not fully satisfied, relevant creators can respond with a Build a Bid proposal.</p>
+<div class="demo"><b>2bid checks supply first.</b> The buyer should not commission new data if an existing creator listing can already satisfy the requirement.</div>
+<div class="statrow"><div class="stat"><b>1</b><span>Strong existing listing</span></div><div class="stat"><b>8</b><span>Potential creator matches</span></div><div class="stat"><b>3</b><span>Creators invited in demo</span></div><div class="stat"><b>$15–30K</b><span>Buyer budget</span></div></div>
+<div class="card">
+  <span class="tag green">EXISTING SUPPLY FOUND</span>
+  <div class="match"><div><h2 style="font-size:17px;margin:10px 0 4px">PII Masking 65K</h2><div class="small">Existing 2bid listing · multilingual privacy / PII data · commercial terms available</div></div><div><div class="score">76%</div><div class="small">potential fit</div></div></div>
+  <div class="callout" style="margin-top:14px"><b>Buyer requirement is larger than this listing.</b> 2bid can surface the existing dataset while also inviting the creator to propose an expanded or custom version.</div>
+</div>
+<div class="card" style="margin-top:14px">
+  <span class="tag blue">CREATOR OPPORTUNITIES</span>
+  <div class="match"><div><b>Ai4Privacy / privacy-data creator</b><div class="small">Relevant existing datasets + capability to extend volume/languages</div></div><div class="score">92%</div></div>
+  <div class="match"><div><b>Multilingual NLP Studio</b><div class="small">Human-labelled entity data · 18 languages</div></div><div class="score">86%</div></div>
+  <div class="match"><div><b>Enterprise Privacy Data Lab</b><div class="small">Synthetic + reviewed PII corpora · custom delivery</div></div><div class="score">81%</div></div>
+  <div style="margin-top:17px"><a class="primary" href="buyer-sourcing-offers.html">View Creator Bids →</a></div>
+</div>
+
+<div class="footer"><span>2bid.ai · Buyer Demo</span><span>Demo only · No payment or real sourcing request is submitted</span></div></main></body></html>

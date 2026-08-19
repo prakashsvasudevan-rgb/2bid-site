@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2bid.ai — Set Terms Demo</title>
+
+<meta name="description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://2bid.ai/creator-terms.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="2bid.ai">
+<meta property="og:title" content="2bid.ai — Set Terms Demo">
+<meta property="og:description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+<meta property="og:url" content="https://2bid.ai/creator-terms.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2bid.ai — Set Terms Demo">
+<meta name="twitter:description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{--ink:#10162f;--muted:#68728a;--line:#e7eaf2;--violet:#563af4;--blue:#1978ff;--green:#17a66a;--orange:#f59a20;--red:#d14f57}
+body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:#fff;font-size:14px}
+a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}
+nav{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 30px;border-bottom:1px solid #eef0f5;background:#fff}
+.logo{font-size:30px;font-weight:900;background:linear-gradient(90deg,#5437ef,#1483ff);-webkit-background-clip:text;color:transparent}
+.nav{display:flex;gap:25px;align-items:center;font-size:13px;font-weight:700}.outline{padding:10px 14px;border:1px solid #dfe3ed;border-radius:9px}
+.wrap{max-width:1180px;margin:auto;padding:28px 28px 60px}
+.back{font-size:11px;color:#68728a;font-weight:700}.head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-top:14px}
+.eyebrow{font-size:10px;color:#583cf0;font-weight:900;text-transform:uppercase}.head h1{font-size:31px;letter-spacing:-.04em;margin:5px 0}.head p{font-size:12px;color:#69738a;margin:0;line-height:1.55}
+.save{padding:10px 13px;border:1px solid #dfe3ed;border-radius:9px;background:#fff;font-size:11px;font-weight:800}
+.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin:20px 0}.step{padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:9px;color:#7a8396}.step b{display:block;font-size:11px;color:#1c243e;margin-bottom:2px}.step.done{background:#f1fcf6;border-color:#c9ead8}.step.active{background:#f2efff;border-color:#9e8dff}
+.demo{margin-bottom:14px;padding:12px 14px;border:1px solid #e4defe;border-radius:11px;background:linear-gradient(90deg,#faf8ff,#f4f2ff);display:flex;justify-content:space-between;gap:12px;align-items:center}
+.demo b{font-size:12px}.demo span{font-size:10px;color:#6c6581}.demo a{padding:8px 11px;border-radius:8px;background:linear-gradient(135deg,#5a3df6,#2718e2);color:#fff;font-size:10px;font-weight:800}
+.layout{display:grid;grid-template-columns:1fr 335px;gap:15px}.card{border:1px solid var(--line);border-radius:15px;background:#fff;padding:18px}
+.card h2{font-size:18px;margin:0 0 4px}.sub{font-size:11px;color:#747e92;line-height:1.55;margin-bottom:14px}
+.source-gate{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:13px;border:1px solid #f2d7ae;background:#fff9ef;border-radius:11px;margin-bottom:15px}
+.source-gate b{font-size:12px}.source-gate p{font-size:10px;color:#7c6b56;line-height:1.5;margin:4px 0 0}.review{white-space:nowrap;padding:5px 8px;border-radius:999px;background:#fff0d5;color:#a05f00;font-size:9px;font-weight:900}
+.tiers{display:grid;gap:11px}.tier{border:1px solid var(--line);border-radius:13px;padding:15px;background:#fff;position:relative}.tier.featured{border-color:#a997ff;box-shadow:0 10px 30px rgba(71,53,223,.08)}
+.tier-top{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}.tier-name{display:flex;gap:11px}.ticon{width:39px;height:39px;border-radius:11px;display:grid;place-items:center;font-size:17px;background:#eeeaff;color:#563af4}.commercial .ticon{background:#e9f8ef;color:#168654}.enterprise .ticon{background:#fff1df;color:#c77800}
+.tier h3{font-size:14px;margin:0}.tier p{font-size:10px;color:#6e788c;line-height:1.5;margin:4px 0 0}.price{text-align:right}.price b{font-size:17px}.price span{display:block;font-size:9px;color:#7d8799;margin-top:2px}
+.status{display:inline-flex;margin-top:9px;padding:4px 7px;border-radius:999px;background:#eef9f3;color:#168654;font-size:8px;font-weight:900}.status.orange{background:#fff2df;color:#a96300}
+.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}.rule{padding:10px;border-radius:9px;background:#fafbfe;border:1px solid #eef0f5}.rule label{display:block;font-size:8px;color:#818a9b;text-transform:uppercase;letter-spacing:.04em}.rule b{display:block;font-size:10px;margin-top:3px}
+.conditions{margin-top:12px;border-top:1px solid #eef0f5;padding-top:11px}.conditions div{display:flex;gap:8px;align-items:flex-start;font-size:10px;color:#5e687b;line-height:1.45;margin:7px 0}.tick{color:#16915a;font-weight:900}.no{color:#c45c63;font-weight:900}
+.note{margin-top:15px;padding:12px;border:1px solid #e9e5ff;background:#faf8ff;border-radius:10px;font-size:10px;color:#655f7b;line-height:1.55}
+.preview{background:linear-gradient(145deg,#6848f5,#4056ee 55%,#1f5fdb);color:#fff;position:sticky;top:20px;overflow:hidden;min-height:640px}.preview:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:36px 36px}.preview>*{position:relative}.preview small{font-size:9px;opacity:.75}.preview h3{font-size:20px;margin:8px 0}.preview p{font-size:11px;line-height:1.55;opacity:.88}
+.poption{margin-top:10px;padding:12px;border-radius:11px;background:#fff;color:#111827}.poption .row{display:flex;justify-content:space-between;gap:10px;align-items:center}.poption b{font-size:12px}.poption .pprice{font-size:14px;font-weight:900}.poption span{display:block;font-size:9px;color:#7b8497;margin-top:4px}.poption button{width:100%;margin-top:10px;border:0;border-radius:8px;padding:9px;color:#fff;background:linear-gradient(135deg,#5a3df6,#2718e2);font-size:9px;font-weight:900}.poption button.dark{background:#111827}.poption button.light{background:#fff;color:#111827;border:1px solid #dde1ea}
+.source{margin-top:13px;padding:10px;border-radius:9px;background:rgba(255,255,255,.12);font-size:10px;line-height:1.55}
+.footer{margin-top:15px;padding:14px;border:1px solid var(--line);border-radius:13px;display:flex;justify-content:space-between;align-items:center}.footer p{font-size:10px;color:#707a8e;margin:0}.actions{display:flex;gap:8px}.secondary{padding:10px 13px;border:1px solid #dfe3ed;border-radius:8px;background:#fff;font-size:10px;font-weight:800}.primary{padding:10px 14px;border:0;border-radius:8px;color:#fff;background:linear-gradient(135deg,#5a3df6,#2718e2);font-size:10px;font-weight:900}
+.toast{position:fixed;right:22px;bottom:22px;z-index:120;width:min(390px,calc(100vw - 44px));padding:15px 16px;border-radius:13px;background:#11184b;color:#fff;box-shadow:0 18px 50px rgba(14,22,70,.28);display:none}.toast b{display:block;font-size:13px;margin-bottom:4px}.toast p{font-size:10px;line-height:1.5;color:#d8def4;margin:0 0 10px}.toast a{display:inline-block;padding:8px 10px;border-radius:8px;background:#fff;color:#11184b;font-size:9px;font-weight:800}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.preview{position:relative;top:auto}.steps{grid-template-columns:repeat(3,1fr)}}
+</style>
+
+<style id="2bid-mobile-audit">
+/* 2bid.ai mobile launch pass */
+html,body{max-width:100%;overflow-x:hidden}
+img,video,svg,canvas{max-width:100%;height:auto}
+input,select,textarea,button{max-width:100%}
+table{max-width:100%}
+@media (max-width: 768px){
+  body{font-size:14px}
+  nav{padding-left:16px!important;padding-right:16px!important}
+  .wrap,.container,.panel-inner,.how-inner{
+    width:100%!important;
+    max-width:100%!important;
+    padding-left:16px!important;
+    padding-right:16px!important
+  }
+  h1{font-size:clamp(28px,8vw,36px)!important;line-height:1.12!important}
+  h2{line-height:1.2}
+  .grid2,.grid3,.row2,.two-col,.three-col,.layout,.shell,.how-grid,.mp-flow,.statrow{
+    grid-template-columns:1fr!important
+  }
+  .cards,.card-grid,.ds-grid{
+    grid-template-columns:1fr!important
+  }
+  .steps,.progress{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important
+  }
+  .offer,.match{
+    grid-template-columns:1fr!important
+  }
+  .hero{padding-left:18px!important;padding-right:18px!important}
+  .hero p,.lead{font-size:13px!important}
+  .card,.formcard,.side,.marketplace-three{padding:16px!important}
+  .footer,.sf-inner{
+    grid-template-columns:1fr!important;
+    flex-direction:column!important;
+    text-align:center!important;
+    gap:12px!important
+  }
+  .sf-right{text-align:center!important}
+  .nav-links li:not(:last-child){display:none!important}
+  .links span{display:none!important}
+  .path-tabs{flex-direction:column!important}
+  .ptab + .ptab{border-left:0!important;border-top:1px solid rgba(0,0,0,.06)}
+  .search-row{flex-direction:column!important}
+  .use-row{flex-direction:column!important}
+  .frow{grid-template-columns:1fr!important}
+  .m-stats{grid-template-columns:1fr 1fr!important}
+  .modal{width:94vw!important;max-height:90vh!important;padding:20px!important}
+  .mp-arrow{transform:rotate(90deg);height:18px}
+  .mp-card{min-height:auto!important}
+  .top,.head,.marketplace-three-head{
+    flex-direction:column!important;
+    align-items:flex-start!important
+  }
+  .primary,.secondary,.btn,.join,.nav-cta{
+    min-height:42px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center
+  }
+}
+@media (max-width: 430px){
+  .steps,.progress{grid-template-columns:1fr!important}
+  .m-stats{grid-template-columns:1fr!important}
+  nav .logo,.logo{font-size:24px!important}
+  .rolebar{grid-template-columns:1fr 1fr!important}
+  .chips{gap:6px!important}
+  .chip{font-size:11px!important}
+}
+</style>
+
+</head>
+<body>
+<nav><div class="logo">2bid.ai</div><div class="nav"><a>For creators</a><a>Browse data</a><a>How it works</a><a class="outline">Creator dashboard</a></div></nav>
+<div class="wrap">
+<a class="back" href="creator-prepare.html">← Back to Prepare</a>
+<div class="head"><div><div class="eyebrow">Creator setup · Step 3</div><h1>Set licensing terms</h1><p>Choose how buyers can use your work. 2bid keeps the source where it is and adds the commercial, issuance and provenance layer.</p></div><button class="save" onclick="lockDemo()">Save draft</button></div>
+
+<div class="steps">
+<div class="step done"><b>1 · Import ✓</b>Source connected</div>
+<div class="step done"><b>2 · Prepare ✓</b>Listing prepared</div>
+<div class="step active"><b>3 · Set terms</b>Licensing</div>
+<div class="step"><b>4 · Build a Bid</b>Add-ons</div>
+<div class="step"><b>5 · Review</b>Buyer view</div>
+<div class="step"><b>6 · Publish</b>Go live</div>
+</div>
+
+<div class="demo"><div><b>Demo mode</b><br><span>Terms are shown as a product example. Only approved creators can save or publish licensing terms.</span></div><a href="register.html?role=creator">Register as a creator</a></div>
+
+<div class="layout">
+<section class="card">
+<h2>Choose your licence options</h2>
+<div class="sub">You stay in control. Buyers see only the licence options you publish for this dataset.</div>
+
+<div class="source-gate">
+<div><b>⚠ Source licence review required</b><p>Hugging Face does not provide a structured licence value for this 65K source. The creator must confirm they have the rights to offer the selected 2bid terms before publishing.</p></div>
+<span class="review">Review required</span>
+</div>
+
+<div class="tiers">
+<div class="tier">
+<div class="tier-top"><div class="tier-name"><div class="ticon">R</div><div><h3>Research</h3><p>For research, evaluation and non-commercial experimentation.</p></div></div><div class="price"><b>Free</b><span>Demo example</span></div></div>
+<span class="status">Enabled</span>
+<div class="rule-grid"><div class="rule"><label>Access</label><b>Licensed download</b></div><div class="rule"><label>Duration</label><b>12 months</b></div></div>
+<div class="conditions"><div><span class="tick">✓</span><span>Research and evaluation use</span></div><div><span class="tick">✓</span><span>Buyer identity attached to licence</span></div><div><span class="no">×</span><span>No commercial products or services</span></div></div>
+</div>
+
+<div class="tier commercial featured">
+<div class="tier-top"><div class="tier-name"><div class="ticon">$</div><div><h3>Commercial</h3><p>For commercial AI training, products and services.</p></div></div><div class="price"><b>TBD</b><span>Creator sets price</span></div></div>
+<span class="status">Available in creator account</span>
+<div class="rule-grid"><div class="rule"><label>Pricing model</label><b>Annual licence</b></div><div class="rule"><label>Buyer verification</label><b>KYB required</b></div></div>
+<div class="conditions"><div><span class="tick">✓</span><span>Commercial model training and evaluation</span></div><div><span class="tick">✓</span><span>Use in products and services under published terms</span></div><div><span class="tick">✓</span><span>Version-specific issuance and provenance record</span></div></div>
+</div>
+
+<div class="tier enterprise">
+<div class="tier-top"><div class="tier-name"><div class="ticon">E</div><div><h3>Enterprise</h3><p>Custom organizational rights, volume needs or special terms.</p></div></div><div class="price"><b>Request terms</b><span>Negotiated</span></div></div>
+<span class="status orange">Optional</span>
+<div class="rule-grid"><div class="rule"><label>Pricing</label><b>Custom quote</b></div><div class="rule"><label>Workflow</label><b>Creator approval</b></div></div>
+<div class="conditions"><div><span class="tick">✓</span><span>Custom rights and permitted users</span></div><div><span class="tick">✓</span><span>Volume, updates or additional support can be included</span></div></div>
+</div>
+</div>
+
+<div class="note"><b>Important:</b> 2bid licensing terms do not replace the creator's source rights. Before publication, the creator confirms that the source licence and ownership permit the rights being offered through 2bid.</div>
+</section>
+
+<aside class="card preview">
+<small>BUYER LICENSING PREVIEW</small>
+<h3>PII Masking 65K</h3>
+<p>The buyer sees clear choices rather than contacting the creator for every standard request.</p>
+
+<div class="poption"><div class="row"><b>Research</b><div class="pprice">Free</div></div><span>Research and evaluation under the creator's published terms.</span><button>Get Research Licence</button></div>
+<div class="poption"><div class="row"><b>Commercial</b><div class="pprice">TBD</div></div><span>Commercial AI training, products and services. Creator sets the price before publication.</span><button class="dark">Commercial Licence</button></div>
+<div class="poption"><div class="row"><b>Enterprise</b><div class="pprice">Custom</div></div><span>Organization-specific rights and requirements.</span><button class="light">Request terms</button></div>
+
+<div class="source">✓ Verified buyer workflow<br>✓ Licence issuance record<br>✓ Version-specific provenance<br>✓ Controlled delivery<br><br><b>Source:</b> Hugging Face · ai4privacy/pii-masking-65k</div>
+</aside>
+</div>
+
+<div class="footer"><p>Set Terms controls the buyer's licence choices. Your original Hugging Face source remains unchanged.</p><div class="actions"><button class="secondary" onclick="lockDemo()">Save & exit</button><a class="primary"  href="creator-bid.html" style="display:inline-block;text-decoration:none">Continue to Build a Bid →</a></div></div>
+</div>
+
+<div class="toast" id="toast"><b>Creator feature — in progress</b><p>Demo visitors can explore the licensing workflow. Saving prices and terms is reserved for approved creators.</p><a href="register.html?role=creator">Register as a creator</a></div>
+<script>
+function lockDemo(){
+ const t=document.getElementById('toast');t.style.display='block';
+ clearTimeout(window.__t);window.__t=setTimeout(()=>t.style.display='none',4200);
+}
+</script>
+<script>
+document.querySelectorAll('button').forEach(b=>{
+ const t=(b.textContent||'').trim();
+ if(t.includes('Continue to Build a Bid')) b.onclick=()=>location.href='creator-bid.html';
+});
+document.querySelectorAll('.back').forEach(x=>{x.style.cursor='pointer';x.onclick=()=>location.href='creator-prepare.html';});
+</script>
+</body>
+</html>

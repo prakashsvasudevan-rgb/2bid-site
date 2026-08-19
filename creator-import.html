@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2bid.ai — Creator Demo Flow</title>
+
+<meta name="description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://2bid.ai/creator-import.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="2bid.ai">
+<meta property="og:title" content="2bid.ai — Creator Demo Flow">
+<meta property="og:description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+<meta property="og:url" content="https://2bid.ai/creator-import.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2bid.ai — Creator Demo Flow">
+<meta name="twitter:description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}:root{--ink:#10162f;--muted:#667085;--line:#e7eaf2;--violet:#563af4;--blue:#1b73ff;--green:#17a66a;--orange:#f59a20}
+body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 12% 8%,#f0ebff,transparent 27%),radial-gradient(circle at 88% 9%,#eaf6ff,transparent 27%),#fff}
+a{text-decoration:none;color:inherit}button,input,select{font-family:inherit}
+nav{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 30px;border-bottom:1px solid #eef0f5;background:#fff}
+.logo{font-size:28px;font-weight:900;background:linear-gradient(90deg,#5338ef,#1685ff);-webkit-background-clip:text;color:transparent}
+.links{display:flex;gap:22px;align-items:center;font-size:12px;font-weight:700}.links .btn{padding:10px 14px;border:1px solid #dfe3ed;border-radius:9px}
+.wrap{max-width:1180px;margin:auto;padding:40px 28px 60px}
+.badge{display:inline-flex;padding:6px 9px;border-radius:999px;background:#efeaff;color:#5038e8;font-size:9px;font-weight:900}
+h1{font-size:43px;letter-spacing:-.045em;margin:13px 0 8px}.lead{font-size:14px;color:#667085;max-width:760px;line-height:1.65}
+.progress{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:27px}.p{height:7px;border-radius:99px;background:#e9ecf4}.p.on{background:linear-gradient(90deg,#5b3ef4,#1c77ff)}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:20px}.card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:20px;box-shadow:0 10px 34px rgba(17,24,39,.045)}
+.card h2{font-size:19px;margin:3px 0 6px}.sub{font-size:10px;color:#6d7689;line-height:1.6}
+.sources{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.source{border:1px solid var(--line);border-radius:12px;padding:13px;cursor:pointer;background:#fff}.source.active{border-color:#8c7cff;background:#f7f5ff}.source b{font-size:11px}.source span{display:block;font-size:8px;color:#778095;margin-top:4px}
+.url{margin-top:14px;display:flex;gap:8px}.url input{flex:1;padding:11px 12px;border:1px solid #dfe3ed;border-radius:9px;font-size:9px}.primary{border:0;border-radius:9px;padding:11px 14px;color:#fff;font-size:9px;font-weight:900;background:linear-gradient(135deg,#5a3df6,#2718e4);cursor:pointer}
+.preview{background:linear-gradient(145deg,#6b4bf5,#3f58ef 52%,#215cdb);color:#fff;position:relative;overflow:hidden}.preview:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:38px 38px}.preview>*{position:relative}.preview h3{font-size:15px}.meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:15px}.m{padding:10px;border-radius:10px;background:rgba(255,255,255,.13)}.m label{display:block;font-size:7px;opacity:.75}.m b{font-size:11px}.check{margin-top:14px;padding:11px;border-radius:10px;background:rgba(255,255,255,.12);font-size:9px;line-height:1.7}
+.steps{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.step{border:1px solid var(--line);border-radius:14px;padding:15px;background:#fff}.num{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:#efeaff;color:#553be9;font-size:9px;font-weight:900}.step h3{font-size:11px}.step p{font-size:8px;color:#6f788b;line-height:1.55}.step .done{color:#16915a;font-size:8px;font-weight:800}
+.footercta{margin-top:22px;padding:24px;border-radius:16px;background:#11184b;color:#fff;display:flex;justify-content:space-between;gap:20px;align-items:center}.footercta h2{font-size:20px;margin:0}.footercta p{font-size:9px;color:#cbd2eb}.footercta a{padding:11px 14px;border-radius:9px;background:#fff;color:#1c2442;font-size:9px;font-weight:900}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.progress{grid-template-columns:repeat(4,1fr)}}
+
+.source:not(.active){filter:blur(.65px) grayscale(.15);opacity:.48;pointer-events:none;position:relative}
+.source:not(.active)::after{content:"COMING SOON";position:absolute;right:10px;top:10px;font-size:7px;font-weight:900;color:#737b8c;background:#f1f2f6;padding:4px 6px;border-radius:999px}
+.demo-next{display:none;margin-top:14px;padding:16px;border:1px solid #cdebd9;border-radius:12px;background:#f0fbf5;align-items:center;justify-content:space-between;gap:15px}
+.demo-next b{font-size:11px}.demo-next span{font-size:9px;color:#63766c}.demo-next a{padding:10px 13px;background:#563af4;color:#fff;border-radius:9px;font-size:9px;font-weight:900}
+</style>
+<style id="2bid-mobile-audit">
+/* 2bid.ai mobile launch pass */
+html,body{max-width:100%;overflow-x:hidden}
+img,video,svg,canvas{max-width:100%;height:auto}
+input,select,textarea,button{max-width:100%}
+table{max-width:100%}
+@media (max-width: 768px){
+  body{font-size:14px}
+  nav{padding-left:16px!important;padding-right:16px!important}
+  .wrap,.container,.panel-inner,.how-inner{
+    width:100%!important;
+    max-width:100%!important;
+    padding-left:16px!important;
+    padding-right:16px!important
+  }
+  h1{font-size:clamp(28px,8vw,36px)!important;line-height:1.12!important}
+  h2{line-height:1.2}
+  .grid2,.grid3,.row2,.two-col,.three-col,.layout,.shell,.how-grid,.mp-flow,.statrow{
+    grid-template-columns:1fr!important
+  }
+  .cards,.card-grid,.ds-grid{
+    grid-template-columns:1fr!important
+  }
+  .steps,.progress{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important
+  }
+  .offer,.match{
+    grid-template-columns:1fr!important
+  }
+  .hero{padding-left:18px!important;padding-right:18px!important}
+  .hero p,.lead{font-size:13px!important}
+  .card,.formcard,.side,.marketplace-three{padding:16px!important}
+  .footer,.sf-inner{
+    grid-template-columns:1fr!important;
+    flex-direction:column!important;
+    text-align:center!important;
+    gap:12px!important
+  }
+  .sf-right{text-align:center!important}
+  .nav-links li:not(:last-child){display:none!important}
+  .links span{display:none!important}
+  .path-tabs{flex-direction:column!important}
+  .ptab + .ptab{border-left:0!important;border-top:1px solid rgba(0,0,0,.06)}
+  .search-row{flex-direction:column!important}
+  .use-row{flex-direction:column!important}
+  .frow{grid-template-columns:1fr!important}
+  .m-stats{grid-template-columns:1fr 1fr!important}
+  .modal{width:94vw!important;max-height:90vh!important;padding:20px!important}
+  .mp-arrow{transform:rotate(90deg);height:18px}
+  .mp-card{min-height:auto!important}
+  .top,.head,.marketplace-three-head{
+    flex-direction:column!important;
+    align-items:flex-start!important
+  }
+  .primary,.secondary,.btn,.join,.nav-cta{
+    min-height:42px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center
+  }
+}
+@media (max-width: 430px){
+  .steps,.progress{grid-template-columns:1fr!important}
+  .m-stats{grid-template-columns:1fr!important}
+  nav .logo,.logo{font-size:24px!important}
+  .rolebar{grid-template-columns:1fr 1fr!important}
+  .chips{gap:6px!important}
+  .chip{font-size:11px!important}
+}
+</style>
+
+</head><body>
+<nav><div class="logo">2bid.ai</div><div class="links"><a href="creator-overview.html">Creator dashboard</a><a href="index.html">Home</a><a class="btn" href="creator-overview.html">Back to journey overview</a></div></nav>
+<div class="wrap"><span class="badge">OPEN CREATOR DEMO</span><h1>Bring your existing work. <span style="color:#5a3df2">Build the commercial layer.</span></h1>
+<p class="lead">This demo uses a pre-built Hugging Face import so creators can experience the complete journey safely. Other source buttons are visible as the future product direction.</p>
+<div class="progress"><div class="p on"></div><div class="p on"></div><div class="p on"></div><div class="p on"></div><div class="p on"></div><div class="p on"></div><div class="p on"></div></div>
+
+<div class="grid"><section class="card"><div class="badge">1 · IMPORT</div><h2>Connect your source</h2><div class="sub">No migration. 2bid reads the listing metadata and builds the commercial storefront around it.</div>
+<div class="sources"><div class="source active"><b>🤗 Hugging Face</b><span>Demo connection ready</span></div><div class="source"><b>◈ Kaggle</b><span>Coming soon</span></div><div class="source"><b>⌘ GitHub / Own server</b><span>Coming soon</span></div><div class="source"><b>☁ 2bid Storage</b><span>Coming soon</span></div></div>
+<div class="url"><input value="https://huggingface.co/datasets/ai4privacy/pii-masking-65k" readonly><button class="primary" onclick="document.getElementById('imported').style.display='block';document.getElementById('demoNext').style.display='flex';this.textContent='Imported ✓';this.disabled=true">Connect & import</button></div></section>
+
+<section class="card preview"><div class="badge" style="background:rgba(255,255,255,.15);color:#fff">BUYER PREVIEW</div><h3>PII Masking NER Dataset — 65K</h3><div style="font-size:9px;opacity:.84">Ai4Privacy ✓ · Hugging Face source</div>
+<div class="meta"><div class="m"><label>RECORDS</label><b>65K+</b></div><div class="m"><label>LANGUAGES</label><b>5</b></div><div class="m"><label>COMMERCIAL</label><b>TBD</b></div></div>
+<div class="check">✓ Metadata imported<br>✓ Original source preserved<br>✓ Data owner verification shown<br>✓ Research / Commercial / Enterprise terms<br>✓ Bid add-ons after purchase</div></section></div>
+
+<div id="imported" style="display:none;margin-top:14px;padding:12px 14px;border:1px solid #bce8cf;border-radius:11px;background:#edfbf3;color:#167a4d;font-size:9px;font-weight:800">✓ Demo import complete — metadata, documentation and source identity are ready for creator review.</div>
+
+<div class="demo-next" id="demoNext"><div><b>Import complete. Now review what 2bid brought across.</b><br><span>The original Hugging Face source remains unchanged.</span></div><a href="creator-prepare.html">Continue to Step 2 — Prepare →</a></div></div></body></html>

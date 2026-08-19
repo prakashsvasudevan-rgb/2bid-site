@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2bid.ai — Build a Bid Demo</title>
+
+<meta name="description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://2bid.ai/creator-bid.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="2bid.ai">
+<meta property="og:title" content="2bid.ai — Build a Bid Demo">
+<meta property="og:description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+<meta property="og:url" content="https://2bid.ai/creator-bid.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2bid.ai — Build a Bid Demo">
+<meta name="twitter:description" content="Interactive 2bid.ai product demonstration. This workflow page is not intended as a standalone search landing page.">
+
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:#111831;background:#fff;font-size:14px}
+button{font:inherit}.nav{height:70px;border-bottom:1px solid #edf0f5;display:flex;align-items:center;justify-content:space-between;padding:0 30px}
+.logo{font-size:30px;font-weight:900;background:linear-gradient(90deg,#563af4,#1682ff);-webkit-background-clip:text;color:transparent}
+.links{display:flex;gap:25px;align-items:center;font-size:13px;font-weight:700}.dash{border:1px solid #dfe3ed;padding:10px 14px;border-radius:9px}
+.wrap{max-width:1180px;margin:auto;padding:28px}.back{font-size:11px;color:#69738a;font-weight:700}
+.head{display:flex;justify-content:space-between;align-items:flex-start;margin:14px 0}.ey{font-size:10px;font-weight:900;color:#573bf1;text-transform:uppercase}
+h1{font-size:31px;letter-spacing:-.04em;margin:5px 0}p{color:#6d778c;line-height:1.55}.head p{font-size:12px;margin:0}
+.btn{border:1px solid #dfe3ed;background:#fff;border-radius:9px;padding:10px 13px;font-size:11px;font-weight:800}
+.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin:20px 0}.step{padding:10px;border:1px solid #e7eaf2;border-radius:10px;font-size:9px;color:#7a8396}.step b{display:block;color:#1c243e;font-size:11px}.done{background:#f1fcf6;border-color:#c9ead8}.active{background:#f2efff;border-color:#9e8dff}
+.demo{padding:12px 14px;border:1px solid #e4defe;border-radius:11px;background:#f8f6ff;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.demo b{font-size:12px}.demo span{font-size:10px;color:#706981}.register{background:#563af4;color:#fff;border:0;padding:8px 11px;border-radius:8px;font-size:10px;font-weight:800}
+.layout{display:grid;grid-template-columns:1fr 335px;gap:15px}.card{border:1px solid #e7eaf2;border-radius:15px;padding:18px;background:#fff}h2{font-size:18px;margin:0 0 4px}.sub{font-size:11px;color:#747e92;margin-bottom:15px}
+.callout{padding:13px;border:1px solid #dcd6ff;background:#faf9ff;border-radius:11px;margin-bottom:14px}.callout b{font-size:12px}.callout p{font-size:10px;margin:4px 0 0}
+.addons{display:grid;grid-template-columns:1fr 1fr;gap:11px}.addon{border:1px solid #e7eaf2;border-radius:12px;padding:14px;min-height:150px;position:relative}.addon.on{border-color:#a997ff;background:#fdfcff}
+.icon{width:35px;height:35px;border-radius:10px;background:#eeeaff;color:#563af4;display:grid;place-items:center;font-weight:900;margin-bottom:9px}.addon h3{font-size:13px;margin:0}.addon p{font-size:10px;margin:5px 0 10px}.tag{display:inline-block;background:#f1edff;color:#563af4;border-radius:999px;padding:4px 7px;font-size:8px;font-weight:900}.optional{background:#f4f5f8;color:#737c8d}
+.switch{position:absolute;right:13px;top:13px;width:31px;height:18px;border-radius:20px;background:#d8dce6}.switch:after{content:"";position:absolute;width:14px;height:14px;background:#fff;border-radius:50%;top:2px;left:2px;box-shadow:0 1px 3px #999}.on .switch{background:#563af4}.on .switch:after{left:15px}
+.summary{margin-top:14px;border-top:1px solid #edf0f5;padding-top:14px}.sumrow{display:flex;justify-content:space-between;padding:8px 0;font-size:10px;border-bottom:1px solid #f0f2f6}.sumrow b{font-size:10px}
+.preview{background:linear-gradient(145deg,#6848f5,#4056ee 55%,#1f5fdb);color:#fff;min-height:610px;position:sticky;top:20px;overflow:hidden}.preview:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:36px 36px}.preview>*{position:relative}.preview small{font-size:9px;opacity:.75}.preview h3{font-size:20px;margin:8px 0}.preview>p{font-size:11px;color:#e7eaff}
+.bidbox{background:#fff;color:#111831;border-radius:12px;padding:13px;margin-top:12px}.bidbox b{font-size:12px}.bidbox p{font-size:9px;margin:4px 0 10px}.biditem{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid #edf0f5;font-size:9px}.biditem strong{font-size:9px}.buyer{width:100%;border:0;border-radius:8px;padding:10px;background:#111831;color:#fff;font-size:9px;font-weight:900;margin-top:8px}
+.footer{margin-top:15px;padding:14px;border:1px solid #e7eaf2;border-radius:13px;display:flex;justify-content:space-between;align-items:center}.footer p{font-size:10px;margin:0}.actions{display:flex;gap:8px}.primary{background:linear-gradient(135deg,#5a3df6,#2718e2);color:#fff;border:0;border-radius:8px;padding:10px 14px;font-size:10px;font-weight:900}
+.toast{position:fixed;right:22px;bottom:22px;width:380px;max-width:calc(100vw - 44px);background:#11184b;color:#fff;padding:15px;border-radius:13px;display:none;box-shadow:0 18px 50px #1115;z-index:9}.toast b{font-size:13px}.toast p{font-size:10px;color:#d8def4;margin:4px 0 10px}.toast button{background:#fff;color:#11184b;border:0;border-radius:8px;padding:8px 10px;font-size:9px;font-weight:800}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.addons{grid-template-columns:1fr}.steps{grid-template-columns:repeat(3,1fr)}.preview{position:relative}}
+</style>
+<style id="2bid-mobile-audit">
+/* 2bid.ai mobile launch pass */
+html,body{max-width:100%;overflow-x:hidden}
+img,video,svg,canvas{max-width:100%;height:auto}
+input,select,textarea,button{max-width:100%}
+table{max-width:100%}
+@media (max-width: 768px){
+  body{font-size:14px}
+  nav{padding-left:16px!important;padding-right:16px!important}
+  .wrap,.container,.panel-inner,.how-inner{
+    width:100%!important;
+    max-width:100%!important;
+    padding-left:16px!important;
+    padding-right:16px!important
+  }
+  h1{font-size:clamp(28px,8vw,36px)!important;line-height:1.12!important}
+  h2{line-height:1.2}
+  .grid2,.grid3,.row2,.two-col,.three-col,.layout,.shell,.how-grid,.mp-flow,.statrow{
+    grid-template-columns:1fr!important
+  }
+  .cards,.card-grid,.ds-grid{
+    grid-template-columns:1fr!important
+  }
+  .steps,.progress{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important
+  }
+  .offer,.match{
+    grid-template-columns:1fr!important
+  }
+  .hero{padding-left:18px!important;padding-right:18px!important}
+  .hero p,.lead{font-size:13px!important}
+  .card,.formcard,.side,.marketplace-three{padding:16px!important}
+  .footer,.sf-inner{
+    grid-template-columns:1fr!important;
+    flex-direction:column!important;
+    text-align:center!important;
+    gap:12px!important
+  }
+  .sf-right{text-align:center!important}
+  .nav-links li:not(:last-child){display:none!important}
+  .links span{display:none!important}
+  .path-tabs{flex-direction:column!important}
+  .ptab + .ptab{border-left:0!important;border-top:1px solid rgba(0,0,0,.06)}
+  .search-row{flex-direction:column!important}
+  .use-row{flex-direction:column!important}
+  .frow{grid-template-columns:1fr!important}
+  .m-stats{grid-template-columns:1fr 1fr!important}
+  .modal{width:94vw!important;max-height:90vh!important;padding:20px!important}
+  .mp-arrow{transform:rotate(90deg);height:18px}
+  .mp-card{min-height:auto!important}
+  .top,.head,.marketplace-three-head{
+    flex-direction:column!important;
+    align-items:flex-start!important
+  }
+  .primary,.secondary,.btn,.join,.nav-cta{
+    min-height:42px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center
+  }
+}
+@media (max-width: 430px){
+  .steps,.progress{grid-template-columns:1fr!important}
+  .m-stats{grid-template-columns:1fr!important}
+  nav .logo,.logo{font-size:24px!important}
+  .rolebar{grid-template-columns:1fr 1fr!important}
+  .chips{gap:6px!important}
+  .chip{font-size:11px!important}
+}
+</style>
+
+</head>
+<body><div style="max-width:1180px;margin:14px auto 0;padding:0 24px;font-family:Arial,sans-serif;font-size:11px"><a href="index.html" style="color:#563af4;font-weight:800;text-decoration:none">2bid.ai</a> · <a href="creator-overview.html" style="color:#667085;text-decoration:none">Creator journey</a> · <a href="experience-demo.html" style="color:#667085;text-decoration:none">Demo journeys</a></div>
+<div class="nav"><div class="logo">2bid.ai</div><div class="links"><span>For creators</span><span>Browse data</span><span>How it works</span><span class="dash">Creator dashboard</span></div></div>
+<div class="wrap">
+<div class="back">← Back to Set Terms</div>
+<div class="head"><div><div class="ey">Creator setup · Step 4</div><h1>Build a Bid</h1><p>Add optional services and buyer requests around your dataset. Keep the licence simple; let buyers bid for what needs customization.</p></div><button class="btn" onclick="lock()">Save draft</button></div>
+<div class="steps"><div class="step done"><b>1 · Import ✓</b>Source connected</div><div class="step done"><b>2 · Prepare ✓</b>Listing prepared</div><div class="step done"><b>3 · Set terms ✓</b>Licensing</div><div class="step active"><b>4 · Build a Bid</b>Add-ons</div><div class="step"><b>5 · Review</b>Buyer view</div><div class="step"><b>6 · Publish</b>Go live</div></div>
+<div class="demo"><div><b>Demo mode</b><br><span>See how a creator can accept structured buyer requests. Editing is reserved for approved creators.</span></div>
+
+<div class="card" style="margin-bottom:16px;border-color:#ddd6fe;background:linear-gradient(135deg,#ffffff 0%,#faf8ff 100%)">
+  <div style="display:flex;justify-content:space-between;gap:18px;align-items:flex-start;flex-wrap:wrap">
+    <div style="flex:1;min-width:260px">
+      <span class="tag">NEW BUYER ENQUIRY</span>
+      <h2 style="font-size:18px;margin:12px 0 6px">Buyer is looking for multilingual PII training data</h2>
+      <p class="small" style="font-size:10px">
+        Commercial AI use · 500,000+ labelled records · 10+ languages · Budget $15,000–$30,000
+      </p>
+      <p class="lead" style="font-size:10px;margin:10px 0 0">
+        Your dataset and creator profile may be relevant to this sourcing requirement. Do you want to bid?
+      </p>
+    </div>
+    <div style="align-self:center">
+      <button class="primary" type="button" onclick="this.textContent='Bid selected ✓';this.style.opacity='.75'">Bid →</button>
+    </div>
+  </div>
+</div>
+<a class="register" href="register.html?role=creator" style="display:inline-block;text-decoration:none">Register as a creator</a></div>
+<div class="layout">
+<section class="card"><h2>What can buyers request?</h2><div class="sub">Turn repeat custom enquiries into structured options. A buyer can select what they need and submit one clear bid.</div>
+<div class="callout"><b>Licence ≠ Bid</b><p>Standard Research / Commercial rights are handled in Set Terms. Build a Bid is for custom requirements, services or negotiated scope.</p></div>
+<div class="addons">
+<div class="addon on" onclick="lock()"><div class="switch"></div><div class="icon">↻</div><h3>Dataset updates</h3><p>Let buyers request a newer snapshot, refresh or ongoing update schedule.</p><span class="tag">Enabled example</span></div>
+<div class="addon on" onclick="lock()"><div class="switch"></div><div class="icon">{ }</div><h3>Custom format / schema</h3><p>Allow requests for a different structure, fields or delivery format.</p><span class="tag">Enabled example</span></div>
+<div class="addon on" onclick="lock()"><div class="switch"></div><div class="icon">◎</div><h3>Custom subset</h3><p>Buyer can specify language, category, record count or another defined subset.</p><span class="tag">Enabled example</span></div>
+<div class="addon" onclick="lock()"><div class="switch"></div><div class="icon">?</div><h3>Technical support</h3><p>Offer onboarding, documentation walkthrough or implementation support.</p><span class="tag optional">Optional</span></div>
+<div class="addon" onclick="lock()"><div class="switch"></div><div class="icon">★</div><h3>Exclusive / special rights</h3><p>Route unusual rights requests to the creator instead of promising them automatically.</p><span class="tag optional">Creator approval</span></div>
+<div class="addon" onclick="lock()"><div class="switch"></div><div class="icon">＋</div><h3>Custom request</h3><p>Give the buyer one controlled field for a requirement not covered above.</p><span class="tag optional">Open request</span></div>
+</div>
+<div class="summary"><div class="sumrow"><span>Buyer verification</span><b>KYB before commercial bid</b></div><div class="sumrow"><span>Creator response</span><b>Accept · Counter · Decline</b></div><div class="sumrow"><span>Dataset delivery</span><b>Only after agreed terms</b></div><div class="sumrow"><span>Provenance</span><b>Licence + dataset version recorded</b></div></div>
+</section>
+<aside class="card preview"><small>BUYER BID PREVIEW</small><h3>Need something different?</h3><p>Buyers can start with the published licence and add only the custom requirements they need.</p>
+<div class="bidbox"><b>Build your request</b><p>PII Masking 65K · Commercial</p>
+<div class="biditem"><span>✓ Dataset update</span><strong>Requested</strong></div>
+<div class="biditem"><span>✓ Custom subset</span><strong>French + German</strong></div>
+<div class="biditem"><span>✓ Custom format</span><strong>JSONL</strong></div>
+<div class="biditem"><span>Budget</span><strong>Buyer proposes</strong></div>
+<div class="biditem"><span>Needed by</span><strong>Buyer selects date</strong></div>
+<button class="buyer" onclick="lock()">Submit Bid</button></div>
+<div style="margin-top:13px;padding:11px;background:#ffffff1d;border-radius:10px;font-size:10px;line-height:1.6">Creator can:<br>✓ Accept the bid<br>✓ Counter price or scope<br>✓ Decline<br>✓ Issue agreed licence after completion</div>
+</aside></div>
+<div class="footer"><p>Build a Bid captures custom demand without cluttering the standard licence.</p><div class="actions"><button class="btn" onclick="lock()">Save & exit</button><a class="primary"  href="creator-review.html" style="display:inline-block;text-decoration:none">Continue to Review →</a></div></div>
+</div>
+<div class="toast" id="toast"><b>Creator feature — in progress</b><p>Demo visitors can explore Build a Bid, but only approved creators can configure add-ons or receive real bids.</p><a href="register.html?role=creator" style="display:inline-block;text-decoration:none">Register as a creator</a></div>
+<script>function lock(){let t=document.getElementById('toast');t.style.display='block';clearTimeout(window.t);window.t=setTimeout(()=>t.style.display='none',4200)}</script>
+<script>
+document.querySelectorAll('button').forEach(b=>{
+ const t=(b.textContent||'').trim().toLowerCase();
+ if(t.includes('continue') && t.includes('review')) b.onclick=()=>location.href='creator-review.html';
+});
+document.querySelectorAll('.back').forEach(x=>{x.style.cursor='pointer';x.onclick=()=>location.href='creator-terms.html';});
+</script>
+</body></html>
